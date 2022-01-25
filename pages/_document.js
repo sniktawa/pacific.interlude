@@ -25,6 +25,7 @@ class MyDocument extends Document {
             <link rel="manifest" href="/site.webmanifest" />
         </Head>
         <body id="root">
+          <div className="grain"></div>
           <Main />
           <NextScript />
         </body>

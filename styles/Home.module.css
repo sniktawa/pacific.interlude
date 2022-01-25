@@ -11,11 +11,6 @@
   height: 100vh;
 }
 
-.container img {
-  object-fit: cover;
-  width: 100%;
-}
-
 .progressBar {
   border: 1px solid black;
   height: calc(40px + 0.25rem); 
@@ -29,4 +24,16 @@
   background-color: rgb(25, 25, 110);
   margin: 1px;
   flex-grow: 0;
+}
+
+.titleBar {
+  border: 1px solid black;
+  width: calc(100% - 1rem);
+  margin: 0 auto;
+  margin-top: 0.5rem;
+  height: 4rem;
+}
+
+.titleBar h1 {
+  margin-bottom: 0.1rem;
 }
