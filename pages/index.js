@@ -1,9 +1,81 @@
+import React, { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 export default function Home() {
+
+  const [loadedUrls, setLoadedUrls] = useState([])
+
+  const imgUrls = [
+    '/images/8FCE305B-2EED-4E4E-BA32-ED1E64667C93.JPG',
+    '/images/8H7A0006.jpg',
+    '/images/000000190002.jpg',
+    '/images/000000200001.jpg',
+    '/images/000003190006.jpg',
+    '/images/Dior-Flare.jpg',
+    '/images/lonewolf.jpg',
+    '/images/Malibu.jpg',
+    '/images/SabinaBW.jpg',
+    '/images/scan66.jpeg',
+    '/images/Stthomas-waves.jpg',
+  ]
+
+  useEffect(() => {
+
+  }, [])
+
+  const renderImages = () => {
+    return (
+      <Splide className='h-100 w-100'>
+      {
+      imgUrls.map((url, index) => {
+          return (
+          <SplideSlide key={index}>
+            <Image
+              className={`d-flex h-100 w-100`}
+              loading="eager"
+              src={url}
+              alt={url}
+              width={2005}
+              height={3024}
+              onLoadingComplete={() => {
+                if (!loadedUrls.includes(url)) {
+                  setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+                }
+              }}
+            />
+          </SplideSlide>
+        )})
+      }
+    </Splide>
+    )
+  }
+
+  const renderProgressBar = () => {
+    const progress = Math.round(((loadedUrls.length / imgUrls.length) * 100) / 10);
+    const blocks = []
+
+    for (var i = 0; i < progress; i++) {
+      blocks[i] = i
+    }
+
+    return (
+      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == imgUrls.length ? "loadingScreenFinish" : ""}`}>
+        <div className={`d-flex w-100 flex-column text-center`}>
+          <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
+          <div className={`d-flex w-75 ${styles.progressBar}`}>
+            {blocks.map((b) => (
+              <div key={b} className={`d-flex`}>
+              </div>
+            ))}
+          </div>
+         </div>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,28 +84,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Splide className='h-100 w-100'>
-        <SplideSlide>
-          <Image
-            className={`d-flex h-100 w-100`}
-            src={"/images/lonewolf.jpg"}
-            alt={"lonewolf.jpg"}
-            loading={"lazy"}
-            width={2005}
-            height={3024}
-          />
-        </SplideSlide>
-        <SplideSlide>
-          <Image
-            className={`d-flex h-100 w-100`}
-            src={"/images/lonewolf.jpg"}
-            alt={"lonewolf.jpg"}
-            loading={"lazy"}
-            width={2005}
-            height={3024}
-          />
-        </SplideSlide>
-      </Splide>
+      {renderProgressBar()}
+
+      <div className={`h-100 d-100 ${loadedUrls.length != imgUrls.length ? "hide" : ""}`}>
+        {renderImages()}
+      </div>
 
     </div>
   )

@@ -1,9 +1,25 @@
 .container {
   width: 100vw;
   height: 100vh;
+  background-color: #f7f3ea;
 }
 
 .container img {
   object-fit: cover;
   width: 100%;
+}
+
+.progressBar {
+  border: 1px solid black;
+  height: calc(40px + 0.25rem); 
+  margin: 0 auto;
+}
+
+.progressBar div {
+  width: calc(10% - 2px);
+  max-width: calc(10% - 2px);
+  min-width: calc(10% - 2px);
+  background-color: rgb(25, 25, 110);
+  margin: 1px;
+  flex-grow: 0;
 }
