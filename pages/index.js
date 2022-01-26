@@ -47,9 +47,10 @@ export default function Home() {
           <SplideSlide key={index}>
             <Image
               id={`img_${index}`}
-              loading="eager"
               src={url}
               alt={url}
+              unoptimized={true}
+              loading="eager"
               layout="fill"
               objectFit='contain'
               onLoadingComplete={() => {
