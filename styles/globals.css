@@ -46,6 +46,12 @@ a {
   z-index: 46;
 }
 
+img::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%;
+}
+
 .splide__slide {
   width: auto !important;
   max-width: 400vw !important;
