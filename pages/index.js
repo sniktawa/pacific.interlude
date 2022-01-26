@@ -40,7 +40,7 @@ export default function Home() {
         pagination : false,
         drag: 'free',
         height: '100%',
-      } }>
+      } }> 
       {
       imgUrls.map((url, index) => {
           return (
