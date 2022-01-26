@@ -47,7 +47,9 @@ a {
 }
 
 .splide__slide {
-  width: unset !important;
+  width: auto !important;
+  min-width: 100% !important;
+  max-width: 400vw !important;
 }
 
 .splide__slide span {
