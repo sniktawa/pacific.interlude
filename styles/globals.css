@@ -61,6 +61,7 @@ a {
   width: auto !important;
   position: relative !important;
   min-width: 100vw !important;
+  height: 100% !important;
   /* animated filters */
   /* filter: brightness(10000%); */
   /* animation-fill-mode: forwards; */
@@ -71,6 +72,7 @@ a {
   width: auto !important;
   position: relative !important;
   min-width: 100vw !important;
+  height: 100% !important;
   /* animated filters */
   /* filter: brightness(10000%); */
   /* animation-fill-mode: forwards; */
