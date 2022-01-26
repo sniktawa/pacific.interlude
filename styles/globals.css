@@ -105,6 +105,12 @@ a {
   opacity: 0;
 }
 
+@media screen and (max-width: 420px) {
+  .hide-mobile {
+    display: none
+  }
+}
+
 @keyframes fadeAway {
   0% {
     opacity: 1;

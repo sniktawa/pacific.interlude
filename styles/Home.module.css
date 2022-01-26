@@ -9,6 +9,26 @@
   max-height: 100vh;
   width: 100vw;
   height: 100vh;
+  padding: 1rem;
+}
+
+.body {
+  border: 1px solid black;
+  border-top-left-radius: 6rem;
+}
+
+.navBar {
+  border-bottom: 1px solid black;
+  border-top-left-radius: 6rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  margin-left: 0.3rem;
+}
+
+.navBar a {
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: clamp(12px, 2vw, 18px);
 }
 
 .progressBar {
@@ -26,19 +46,18 @@
   flex-grow: 0;
 }
 
-.titleBar {
-  border: 1px solid black;
-  width: calc(100% - 1rem);
-  margin: 0 auto;
-  margin-top: 0.5rem;
-  height: 4rem;
-}
-
-.titleBar h1 {
-  margin-bottom: 0.1rem;
-}
-
 .sliderWide {
   max-width: 300vw;
   width: 100% !important;
 }
+
+.icon {
+  width: 64px;
+}
+
+.icon > span {
+  position: absolute !important;
+  margin-bottom: 1rem !important;
+  margin-left: 1.5rem !important;
+}
+

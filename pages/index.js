@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import Link from 'next/link';
 
 export default function Home() {
 
@@ -98,9 +99,23 @@ export default function Home() {
 
       {renderProgressBar()}
 
-      <div className={`d-flex w-100 h-100 flex-column`}>
-        <div className={`d-flex justify-content-center align-items-center ${styles.titleBar}`}>
-          <h1>Pacific Interlude</h1>
+      <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
+        <div className={`d-flex justify-content-between align-items-center ${styles.navBar}`}>
+            <div className={`d-flex align-items-end`} style={{ marginTop: '1.5rem' }}>
+              <Link href="/" passHref><a className={'hide-mobile'}>PACIFIC INTERLUDE</a></Link>
+              <Link href="/" passHref><a>PROJECTS</a></Link>
+              <Link href="/" passHref><a>CONTACT</a></Link>
+              <Link href="/" passHref><a>ABOUT</a></Link>
+            </div>
+            <div className={`d-flex align-items-center h-100 ${styles.icon}`}>
+              <Image
+                loading="lazy"
+                src={'/images/LogoBlack.png'}
+                alt={'Logo'}
+                width={32}
+                height={32}
+              />
+            </div>
         </div>
         <div className={`h-100 d-100 ${loadedUrls.length != imgUrls.length ? "hide" : ""}`} style={{ paddingBottom: '5rem' }}>
           {renderImages()}
