@@ -35,6 +35,9 @@
   border: 1px solid black;
   height: calc(40px + 0.25rem); 
   margin: 0 auto;
+  width: 75%;
+  transition: width 1s ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .progressBar div {
@@ -61,4 +64,3 @@
   margin-bottom: 1rem !important;
   margin-left: 1.5rem !important;
 }
-

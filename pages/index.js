@@ -78,7 +78,7 @@ export default function Home() {
       <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == imgUrls.length ? "loadingScreenFinish" : ""}`}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
-          <div className={`d-flex w-75 ${styles.progressBar}`}>
+          <div className={`d-flex ${styles.progressBar}`}>
             {blocks.map((b) => (
               <div key={b} className={`d-flex`}>
               </div>
@@ -109,7 +109,7 @@ export default function Home() {
             </div>
             <div className={`d-flex align-items-center h-100 ${styles.icon}`}>
               <Image
-                loading="lazy"
+                priority={true}
                 src={'/images/LogoBlack.png'}
                 alt={'Logo'}
                 width={32}
