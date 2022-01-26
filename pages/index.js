@@ -45,11 +45,7 @@ export default function Home() {
       imgUrls.map((url, index) => {
           return (
           <SplideSlide key={index}>
-            <img src={url} onLoadedData={() => {
-                if (!loadedUrls.includes(url)) {
-                  setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
-                }
-              }} />
+            <img src={url} onLoad={() => console.log("SUP")} />
             {/* <Image
               id={`img_${index}`}
               key={`img_${index}`}
@@ -103,7 +99,7 @@ export default function Home() {
         
       </Head>
 
-      {!loaded && renderProgressBar()}
+      {/* {!loaded && renderProgressBar()} */}
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <div className={`d-flex justify-content-between align-items-center ${styles.navBar}`}>
@@ -123,7 +119,7 @@ export default function Home() {
               />
             </div>
         </div>
-        <div className={`h-100 d-100`}>
+        <div className={`h-100 d-100`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
           {renderImages()}
         </div>
       </div>
