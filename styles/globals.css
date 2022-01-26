@@ -66,6 +66,16 @@ a {
   /* animation-fill-mode: forwards; */
 }
 
+.splide__slide span img::after {
+  padding: 2rem !important;
+  width: auto !important;
+  position: relative !important;
+  min-width: 100vw !important;
+  /* animated filters */
+  /* filter: brightness(10000%); */
+  /* animation-fill-mode: forwards; */
+}
+
 .seen {
   /* filter: brightness(100%) !important; */
   /* transition: filter 1.5s ease-out; */
