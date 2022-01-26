@@ -119,7 +119,8 @@ export default function Home() {
             </div>
         </div>
         <div className={`h-100 d-100 ${loadedUrls.length != imgUrls.length ? "hide" : ""}`}>
-          {renderImages()}
+          {(!loaded) &&  renderImages()}
+          {(loaded) &&  renderImages()}
         </div>
       </div>
 
