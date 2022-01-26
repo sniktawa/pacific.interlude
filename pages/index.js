@@ -51,6 +51,7 @@ export default function Home() {
               src={url}
               alt={url}
               unoptimized={true}
+              priority={true}
               loading="eager"
               layout="fill"
               objectFit='contain'
