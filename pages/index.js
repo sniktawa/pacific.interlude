@@ -45,7 +45,12 @@ export default function Home() {
       imgUrls.map((url, index) => {
           return (
           <SplideSlide key={index}>
-            <Image
+            <img src={url} onLoadedData={() => {
+                if (!loadedUrls.includes(url)) {
+                  setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+                }
+              }} />
+            {/* <Image
               id={`img_${index}`}
               key={`img_${index}`}
               src={url}
@@ -59,7 +64,7 @@ export default function Home() {
                   setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
                 }
               }}
-            />
+            /> */}
           </SplideSlide>
         )})
       }

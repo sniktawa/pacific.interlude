@@ -56,7 +56,7 @@ a {
   position: relative !important;
 }
 
-.splide__slide span img {
+.splide__slide img {
   padding: 2rem !important;
   width: auto !important;
   position: relative !important;
@@ -67,7 +67,7 @@ a {
   /* animation-fill-mode: forwards; */
 }
 
-.splide__slide span img::after {
+.splide__slide img::after {
   padding: 2rem !important;
   width: auto !important;
   position: relative !important;
