@@ -38,45 +38,51 @@ a {
   z-index: 46;
 }
 
-.splide__slide span {
-  /* Take care of width */
+.splide__slide {
+  display: inline-block !important;
+  overflow: visible !important;
+  position: relative !important;
   width: auto !important;
-  max-width: 1000% !important;
-  /* Take care of heght */
+}
+
+.splide__slide span {
+  width: 100% !important;
+  max-width: 300vw !important;
   height: 100% !important;
   min-height: 100% !important;
   max-height: 100% !important;
-  /* Make sure it's all there */
   overflow: visible !important;
+  position: relative !important;
+  display: inline-block !important;
 }
 
 .splide__slide span img {
   padding: 2rem !important;
-  /* Take care of width */
   width: auto !important;
   max-width: 1000% !important;
-  /* Take care of heght */
   height: 100% !important;
   min-height: 100% !important;
   max-height: 100% !important;
+  position: relative !important;
+  display: block !important;
   /* animated filters */
-  filter: brightness(10000%);
-  animation-fill-mode: forwards;
+  /* filter: brightness(10000%); */
+  /* animation-fill-mode: forwards; */
 }
 
 .seen {
-  filter: brightness(100%) !important;
-  transition: filter 1.5s ease-out;
+  /* filter: brightness(100%) !important; */
+  /* transition: filter 1.5s ease-out; */
 }
 
 .is-visible span img {
-  filter: brightness(100%) !important;
-  transition: filter 1.5s ease-out;
+  /* filter: brightness(100%) !important; */
+  /* transition: filter 1.5s ease-out; */
 }
 
 .is-next span img {
-  filter: brightness(100%) !important;
-  transition: filter 1.5s ease-out;
+  /* filter: brightness(100%) !important; */
+  /* transition: filter 1.5s ease-out; */
 }
 
 .splide__track {
