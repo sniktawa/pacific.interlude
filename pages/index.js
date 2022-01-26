@@ -52,10 +52,6 @@ export default function Home() {
               alt={url}
               unoptimized={true}
               priority={true}
-              width={300}
-              // loading="eager"
-              placeholder="blur"
-              blurDataURL={url}
               layout="fill"
               objectFit='contain'
               onLoadingComplete={() => {
