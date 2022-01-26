@@ -35,10 +35,11 @@ export default function Home() {
         console.log(document.getElementById('img_' + e.index))
         document.getElementById('img_' + e.index).classList.add('seen')
       }} options={ {
-        gap   : '-40px',
+        // gap   : '-40px',
         arrows : false,
         pagination : false,
         drag: 'free',
+        height: '100%',
       } }>
       {
       imgUrls.map((url, index) => {

@@ -39,18 +39,27 @@ a {
 }
 
 .splide__slide span {
-  width: 100% !important;
+  /* Take care of width */
+  width: auto !important;
+  max-width: 1000% !important;
+  /* Take care of heght */
   height: 100% !important;
   min-height: 100% !important;
   max-height: 100% !important;
+  /* Make sure it's all there */
+  overflow: visible !important;
 }
 
 .splide__slide span img {
   padding: 2rem !important;
-  width: 100% !important;
+  /* Take care of width */
+  width: auto !important;
+  max-width: 1000% !important;
+  /* Take care of heght */
   height: 100% !important;
   min-height: 100% !important;
   max-height: 100% !important;
+  /* animated filters */
   filter: brightness(10000%);
   animation-fill-mode: forwards;
 }
