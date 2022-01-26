@@ -48,7 +48,6 @@ a {
 
 .splide__slide {
   width: auto !important;
-  min-width: 100% !important;
   max-width: 400vw !important;
 }
 
