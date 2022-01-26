@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default function Home() {
 
-  const [loadedUrls, setLoadedUrls] = useState([])
+  const [count, setCount] = useState(0)
   const [loaded, setLoaded] = useState(false)
 
   const imgUrls = [
@@ -25,16 +25,20 @@ export default function Home() {
   ]
 
   useEffect(() => {
-
+    var timesRun = 0;
+    var interval = setInterval(function(){
+      setCount((count) => count + 1)
+      timesRun += 1;
+      if(timesRun >= 10){
+          clearInterval(interval);
+      }
+      //do whatever here..
+  }, 500); 
   }, [])
 
   const renderImages = () => {
     return (
-      <Splide className={`h-100 w-100 ${styles.sliderWide}`} onVisible={e => {
-        // document.getElementById('img_' + e.index).classList.add('seen')
-      }} onActive={e => {
-        // document.getElementById('img_' + e.index).classList.add('seen')
-      }} options={ {
+      <Splide className={`h-100 w-100 ${styles.sliderWide}`} options={ {
         gap   : '-40px',
         arrows : false,
         pagination : false,
@@ -45,7 +49,7 @@ export default function Home() {
       imgUrls.map((url, index) => {
           return (
           <SplideSlide key={index}>
-            <img src={url} onLoad={() => console.log("SUP")} />
+            <img src={url} alt={url} />
             {/* <Image
               id={`img_${index}`}
               key={`img_${index}`}
@@ -69,15 +73,14 @@ export default function Home() {
   }
 
   const renderProgressBar = () => {
-    const progress = Math.round(((loadedUrls.length / imgUrls.length) * 100) / 10);
     const blocks = []
 
-    for (var i = 0; i < progress; i++) {
+    for (var i = 0; i < count; i++) {
       blocks[i] = i
     }
 
     return (
-      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == imgUrls.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
+      <div className={`loadingScreen justify-content-center align-items-center ${count >=  10 ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
           <div className={`d-flex ${styles.progressBar}`}>
@@ -99,7 +102,7 @@ export default function Home() {
         
       </Head>
 
-      {/* {!loaded && renderProgressBar()} */}
+      {!loaded && renderProgressBar()}
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <div className={`d-flex justify-content-between align-items-center ${styles.navBar}`}>
