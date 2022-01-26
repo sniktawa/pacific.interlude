@@ -37,3 +37,8 @@
 .titleBar h1 {
   margin-bottom: 0.1rem;
 }
+
+.sliderWide {
+  max-width: 300vw;
+  width: 100% !important;
+}
