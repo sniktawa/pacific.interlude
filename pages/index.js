@@ -31,9 +31,9 @@ export default function Home() {
   const renderImages = () => {
     return (
       <Splide className={`h-100 w-100 ${styles.sliderWide}`} onVisible={e => {
-        document.getElementById('img_' + e.index).classList.add('seen')
+        // document.getElementById('img_' + e.index).classList.add('seen')
       }} onActive={e => {
-        document.getElementById('img_' + e.index).classList.add('seen')
+        // document.getElementById('img_' + e.index).classList.add('seen')
       }} options={ {
         gap   : '-40px',
         arrows : false,
