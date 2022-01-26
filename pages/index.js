@@ -109,7 +109,7 @@ export default function Home() {
             </div>
             <div className={`d-flex align-items-center h-100 ${styles.icon}`}>
               <Image
-                priority={true}
+                loading="lazy"
                 src={'/images/LogoBlack.png'}
                 alt={'Logo'}
                 width={32}

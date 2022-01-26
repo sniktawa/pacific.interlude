@@ -39,32 +39,18 @@ a {
 }
 
 .splide__slide {
-  display: inline-block !important;
-  overflow: visible !important;
-  position: relative !important;
-  width: auto !important;
+  width: unset !important;
 }
 
 .splide__slide span {
-  width: 100% !important;
-  max-width: 300vw !important;
   height: 100% !important;
-  min-height: 100% !important;
-  max-height: 100% !important;
-  overflow: visible !important;
   position: relative !important;
-  display: inline-block !important;
 }
 
 .splide__slide span img {
   padding: 2rem !important;
-  width: auto !important;
-  max-width: 1000% !important;
-  height: 100% !important;
-  min-height: 100% !important;
-  max-height: 100% !important;
+  width: unset !important;
   position: relative !important;
-  display: block !important;
   /* animated filters */
   /* filter: brightness(10000%); */
   /* animation-fill-mode: forwards; */
