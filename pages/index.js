@@ -51,7 +51,7 @@ export default function Home() {
               src={url}
               alt={url}
               unoptimized={true}
-              // priority={true}
+              priority={true}
               layout="fill"
               objectFit='contain'
               onLoadingComplete={() => {
@@ -98,7 +98,7 @@ export default function Home() {
         
       </Head>
 
-      {/* {!loaded && renderProgressBar()} */}
+      {!loaded && renderProgressBar()}
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <div className={`d-flex justify-content-between align-items-center ${styles.navBar}`}>
