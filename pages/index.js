@@ -121,6 +121,7 @@ export default function Home() {
                 width={32}
                 height={32}
               /> */}
+              <img src="/images/LogoBlack.png" alt="Logo" width={32} height={32} />
             </div>
         </div>
         <div className={`h-100 d-100`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
