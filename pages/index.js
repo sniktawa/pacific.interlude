@@ -52,7 +52,7 @@ export default function Home() {
               alt={url}
               unoptimized={true}
               priority={true}
-              loading="eager"
+              // loading="eager"
               layout="fill"
               objectFit='contain'
               onLoadingComplete={() => {
