@@ -28,17 +28,24 @@ export default function Home() {
 
   const renderImages = () => {
     return (
-      <Splide className='h-100 w-100' options={ {
+      <Splide className='h-100 w-100' onVisible={e => {
+        console.log(document.getElementById('img_' + e.index))
+        document.getElementById('img_' + e.index).classList.add('seen')
+      }} onActive={e => {
+        console.log(document.getElementById('img_' + e.index))
+        document.getElementById('img_' + e.index).classList.add('seen')
+      }} options={ {
         gap   : '-40px',
         arrows : false,
-        pagination : false
+        pagination : false,
+        drag: 'free',
       } }>
       {
       imgUrls.map((url, index) => {
           return (
           <SplideSlide key={index}>
             <Image
-            style={{ boxShadow: '10px 5px 5px red;' }}
+              id={`img_${index}`}
               loading="eager"
               src={url}
               alt={url}

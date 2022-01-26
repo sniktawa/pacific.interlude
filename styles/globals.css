@@ -41,11 +41,33 @@ a {
 .splide__slide span {
   width: 100% !important;
   height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
 }
 
 .splide__slide span img {
   padding: 2rem !important;
-  filter: drop-shadow(3px 10px 14px rgb(0 0 0 / 70%));
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  filter: brightness(10000%);
+  animation-fill-mode: forwards;
+}
+
+.seen {
+  filter: brightness(100%) !important;
+  transition: filter 1.5s ease-out;
+}
+
+.is-visible span img {
+  filter: brightness(100%) !important;
+  transition: filter 1.5s ease-out;
+}
+
+.is-next span img {
+  filter: brightness(100%) !important;
+  transition: filter 1.5s ease-out;
 }
 
 .splide__track {
