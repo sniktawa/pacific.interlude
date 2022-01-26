@@ -47,6 +47,7 @@ export default function Home() {
           <SplideSlide key={index}>
             <Image
               id={`img_${index}`}
+              key={`img_${index}`}
               src={url}
               alt={url}
               unoptimized={true}
