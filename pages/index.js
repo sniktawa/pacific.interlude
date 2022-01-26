@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Link from 'next/link';
 
 export default function Home() {
 
-  const [count, setCount] = useState(0)
+  const [loadedUrls, setLoadedUrls] = useState([])
   const [loaded, setLoaded] = useState(false)
 
   const imgUrls = [
@@ -25,15 +24,16 @@ export default function Home() {
   ]
 
   useEffect(() => {
-    var timesRun = 0;
-    var interval = setInterval(function(){
-      setCount((count) => count + 1)
-      timesRun += 1;
-      if(timesRun >= 10){
-          clearInterval(interval);
+    imgUrls.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => {
+        console.log("LOADING COMPLETED")
+        if (!loadedUrls.includes(url)) {
+          setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+        }
       }
-      //do whatever here..
-  }, 500); 
+    });
   }, [])
 
   const renderImages = () => {
@@ -73,14 +73,15 @@ export default function Home() {
   }
 
   const renderProgressBar = () => {
+    const progress = Math.round(((loadedUrls.length / imgUrls.length) * 100) / 10);
     const blocks = []
 
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < progress; i++) {
       blocks[i] = i
     }
 
     return (
-      <div className={`loadingScreen justify-content-center align-items-center ${count >=  10 ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
+      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == imgUrls.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
           <div className={`d-flex ${styles.progressBar}`}>
@@ -113,13 +114,13 @@ export default function Home() {
               <Link href="/" passHref><a>ABOUT</a></Link>
             </div>
             <div className={`d-flex align-items-center h-100 ${styles.icon}`}>
-              <Image
+              {/* <Image
                 loading="lazy"
                 src={'/images/LogoBlack.png'}
                 alt={'Logo'}
                 width={32}
                 height={32}
-              />
+              /> */}
             </div>
         </div>
         <div className={`h-100 d-100`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
