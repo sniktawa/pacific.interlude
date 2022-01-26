@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "MorrisSansW01-LightCond";
+  src: url("/fonts/morris.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 html,
 body {
   padding: 0;
