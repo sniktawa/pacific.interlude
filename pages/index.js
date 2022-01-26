@@ -8,6 +8,7 @@ import Link from 'next/link';
 export default function Home() {
 
   const [loadedUrls, setLoadedUrls] = useState([])
+  const [loaded, setLoaded] = useState(false)
 
   const imgUrls = [
     '/images/8FCE305B-2EED-4E4E-BA32-ED1E64667C93.JPG',
@@ -30,10 +31,8 @@ export default function Home() {
   const renderImages = () => {
     return (
       <Splide className={`h-100 w-100 ${styles.sliderWide}`} onVisible={e => {
-        console.log(document.getElementById('img_' + e.index))
         document.getElementById('img_' + e.index).classList.add('seen')
       }} onActive={e => {
-        console.log(document.getElementById('img_' + e.index))
         document.getElementById('img_' + e.index).classList.add('seen')
       }} options={ {
         gap   : '-40px',
@@ -75,7 +74,7 @@ export default function Home() {
     }
 
     return (
-      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == imgUrls.length ? "loadingScreenFinish" : ""}`}>
+      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == imgUrls.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
           <div className={`d-flex ${styles.progressBar}`}>
@@ -97,7 +96,7 @@ export default function Home() {
         
       </Head>
 
-      {renderProgressBar()}
+      {!loaded && renderProgressBar()}
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <div className={`d-flex justify-content-between align-items-center ${styles.navBar}`}>
@@ -117,7 +116,7 @@ export default function Home() {
               />
             </div>
         </div>
-        <div className={`h-100 d-100 ${loadedUrls.length != imgUrls.length ? "hide" : ""}`} style={{ paddingBottom: '5rem' }}>
+        <div className={`h-100 d-100 ${loadedUrls.length != imgUrls.length ? "hide" : ""}`}>
           {renderImages()}
         </div>
       </div>
