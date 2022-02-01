@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Link from 'next/link';
 import axios from 'axios'
+import NavComponent from '../components/NavComponent';
 
 export default function Home() {
 
@@ -97,17 +98,7 @@ export default function Home() {
       {!loaded && renderProgressBar()}
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
-        <div className={`d-flex justify-content-between align-items-center ${styles.navBar}`}>
-            <div className={`d-flex align-items-end`} style={{ marginTop: '1.5rem' }}>
-              <Link href="/" passHref><a className={'hide-mobile'}>PACIFIC INTERLUDE</a></Link>
-              <Link href="/" passHref><a>PROJECTS</a></Link>
-              <Link href="/" passHref><a>CONTACT</a></Link>
-              <Link href="/" passHref><a>ABOUT</a></Link>
-            </div>
-            <div className={`d-flex align-items-center h-100 ${styles.icon}`}>
-              <img src="/images/LogoBlack.png" alt="Logo" width={32} height={32} />
-            </div>
-        </div>
+        <NavComponent />
         <div className={`h-100 d-100`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
           {renderImages()}
         </div>
