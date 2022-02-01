@@ -32,3 +32,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+DROP TABLE IF EXISTS albums, uploads;
+
+CREATE TABLE IF NOT EXISTS albums (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+        title TEXT,
+        description TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+
+CREATE TABLE IF NOT EXISTS uploads (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+        title TEXT,
+        description TEXT,
+        img_src TEXT,
+        album INT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+
+INSERT INTO albums (title) VALUES ('homepage');
