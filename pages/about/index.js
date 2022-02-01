@@ -4,7 +4,7 @@ import styles from '../../styles/Home.module.css'
 import Link from 'next/link';
 import NavComponent from '../../components/NavComponent';
 
-export default function Home() {
+export default function About() {
 
   return (
     <>
