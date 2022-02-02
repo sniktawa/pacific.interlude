@@ -12,6 +12,7 @@
     "@splidejs/splide": "^3.6.11",
     "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
+    "browser-image-compression": "^1.0.17",
     "cloudinary": "^1.28.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",

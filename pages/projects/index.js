@@ -3,6 +3,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link';
 import NavComponent from '../../components/NavComponent';
+import axios from 'axios';
 
 export default function Projects() {
 
@@ -33,15 +34,16 @@ export default function Projects() {
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <NavComponent />
-        <div className={`d-flex flex-column p-4 ${styles.about}`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
-          <h5>contact us</h5>
-          <div className={`d-flex align-items-center`}>
-            <p><a href="mailto:contact@pacificinterlude.com">contact@pacificinterlude.com</a></p>
-          </div>
-          <h5>socials</h5>
-          <div className={`d-flex align-items-center`}>
-            <p><a href="mailto:contact@pacificinterlude.com">@pacificinterlude</a></p>
-          </div>
+        <div className={`d-flex flex-wrap p-4`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
+          {albums && albums.map((album) => {
+            if (album.uploads.length > 0 && album.id !== 1) {
+              return (
+                <div className={`d-flex p-2`} style={{ maxHeight: '50rem' }}>
+                  <img src={album.uploads[0].img_src} className={`h-100`} style={{ objectFit: 'cover', width: 'auto' }} />
+                </div>
+              )
+            }
+          })}
         </div>
       </div>
     </div>

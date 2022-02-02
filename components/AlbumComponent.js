@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import PhotoComponent from "./PhotoComponent";
+import imageCompression from 'browser-image-compression';
 
 export default function AlbumComponent({ album, albums, setAlbums }) {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
@@ -116,7 +117,8 @@ export default function AlbumComponent({ album, albums, setAlbums }) {
 }
 
 export const NewPhotoModal = (props) => {
-  const [picSrc, setPicSrc] = useState(null);
+  const [filesLength, setFilesLength] = useState(0);
+  const [filesUploaded, setFilesUploaded] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const formRef = useRef();
 
@@ -132,9 +134,13 @@ export const NewPhotoModal = (props) => {
   useEffect(() => {
     if (props?.photo) {
       reset(props?.photo);
-      setPicSrc(props.photo.img_src);
     }
+
   }, []);
+
+  const handlePicChange = (e) => {
+    setFilesLength(e.target.files.length)
+  }
 
   const customStyles = {
     content: {
@@ -149,25 +155,17 @@ export const NewPhotoModal = (props) => {
 
   const onClose = () => {
     props.setOpen(false);
-    setPicSrc(null);
+    setFilesLength(0)
+    setFilesUploaded(0)
     setSubmitted(false);
     reset();
   };
 
-  const handlePicChange = (e) => {
-    const reader = new FileReader();
-
-    reader.onload = function (onLoadEvent) {
-      setPicSrc(onLoadEvent.target.result);
-    };
-
-    reader.readAsDataURL(e.target.files[0]);
-  };
-
   const onSubmit = async (data) => {
     setSubmitted(true);
+
     try {
-      if (picSrc && !props?.photo) {
+      if (!props?.photo) {
         const form = formRef.current;
         const fileInput = Array.from(form.elements).find(
           ({ name }) => name === "pic_src"
@@ -175,8 +173,20 @@ export const NewPhotoModal = (props) => {
         const formData = new FormData();
 
         for (const file of fileInput.files) {
-          formData.append("file", file);
-        }
+          const options = {
+            maxSizeMB: 20,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true
+          }
+          try {
+            const compressedFile = await imageCompression(file, options);
+            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+            console.log(compressedFile)
+            formData.append("file", compressedFile);
+          } catch (error) {
+            console.log(error);
+          }
 
         formData.append("upload_preset", "pacific-interlude");
 
@@ -187,7 +197,6 @@ export const NewPhotoModal = (props) => {
             body: formData,
           }
         );
-
         imgUploadData = await imgUploadData.json();
 
         if (imgUploadData?.error) {
@@ -199,19 +208,19 @@ export const NewPhotoModal = (props) => {
           return;
         }
 
-        setPicSrc(imgUploadData.secure_url);
-
         data["img_src"] = imgUploadData.secure_url;
         data["public_id"] = imgUploadData.public_id;
         data["album"] = props.album.id;
 
         axios.defaults.headers.common["authorization"] =
-          window.localStorage.getItem("token");
+        window.localStorage.getItem("token");
         const res = await axios.post(`/api/uploads/create`, data);
 
         if (props?.addPhoto) {
           props.addPhoto(res.data[0]);
         }
+        setFilesUploaded((filesUploaded) => filesUploaded + 1)
+      }
         onClose();
       } else {
         axios.defaults.headers.common["authorization"] =
@@ -297,6 +306,8 @@ export const NewPhotoModal = (props) => {
                 {...register("pic_src", { required: false })}
                 id="pic_src"
                 type="file"
+                multiple={true}
+                accept="image/*"
                 placeholder="https://imgur.com/4a4x8a"
                 className={`form-control ${
                   errors?.pic_src ? "is-invalid" : ""
@@ -309,20 +320,14 @@ export const NewPhotoModal = (props) => {
                 </label>
               )}
             </div>
-            {picSrc && (
-              <div
-                className={`d-flex justify-content-center align-items-center `}
-                style={{
-                  paddingLeft: "0.5rem",
-                  marginTop: "1rem",
-                  overflow: "scroll",
-                  maxWidth: "100%",
-                  maxHeight: "20vh",
-                }}
-              >
-                <img src={picSrc} />
+            {submitted &&
+            <div className={`d-flex flex-column w-100 mt-3`}>
+              <label>Uploading ({Math.round((filesUploaded / filesLength) * 100)}%)</label>
+              <div className="progress">
+                <div className="progress-bar bg-black" role="progressbar" style={{ width: `${Math.round((filesUploaded / filesLength) * 100)}%` }} aria-valuenow={Math.round((filesUploaded / filesLength) * 100)} aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-            )}
+            </div>
+            }
           </div>
         ) : (
           <div className={`d-flex flex-column mb-3`}>
@@ -350,7 +355,7 @@ export const NewPhotoModal = (props) => {
           <button
             type="submit"
             className="btn-black"
-            disabled={!props?.photo && !picSrc || submitted}
+            disabled={!props?.photo && filesLength < 1 || submitted}
           >
             {props?.photo ? "Update" : "Upload"}
           </button>

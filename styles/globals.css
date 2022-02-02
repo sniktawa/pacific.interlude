@@ -63,6 +63,10 @@ a::before {
   transition: transform .3s ease;
 }
 
+.bg-black {
+  background-color: black;
+}
+
 .grain {
   position: fixed;
   pointer-events: none;
