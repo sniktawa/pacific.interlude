@@ -33,6 +33,36 @@ a {
   box-sizing: border-box;
 }
 
+a {
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  color: white;
+}
+
+a::before {  
+  transform: scaleX(0);
+  transform-origin: bottom right;
+}
+
+a:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+a::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  inset: 0 0 0 0;
+  background: hsl(800 0% 20%);
+  z-index: -1;
+  transition: transform .3s ease;
+}
+
 .grain {
   position: fixed;
   pointer-events: none;

@@ -25,7 +25,7 @@ export default function Contact() {
           </div>
           <h5>socials</h5>
           <div className={`d-flex align-items-center`}>
-            <p><a href="mailto:contact@pacificinterlude.com">@pacificinterlude</a></p>
+            <p><a href="https://www.instagram.com/pacificinterlude">@pacificinterlude</a></p>
           </div>
         </div>
       </div>
