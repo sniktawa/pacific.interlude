@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS uploads (
         title TEXT,
         description TEXT,
         img_src TEXT,
+        public_id TEXT,
         album INT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);

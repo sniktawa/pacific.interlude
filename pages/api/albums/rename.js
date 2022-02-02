@@ -6,9 +6,10 @@ export default async function handler(req, res) {
 
   try {
     jwt.verify(req.headers["authorization"], process.env.JWT_SECRET)
-    const results = await excuteQuery({ query: `INSERT INTO uploads (title, description, album, img_src, public_id) VALUES (?, ?, ?, ?, ?)`, values: [req.body.title, req.body.description, req.body.album, req.body.img_src, req.body.public_id] })
-    const result = await excuteQuery({ query: `SELECT * FROM uploads WHERE id='${results.insertId}'`, values: []});
-    return res.json(result)
+    if (req.body.id !== 1) {
+      const results = await excuteQuery({ query: `UPDATE albums SET title='${req.body.title}' WHERE id='${req.body.id}'`, values: [req.body.title] })
+      return res.json(results)
+    }
   } catch (e) {
     if (e instanceof TokenExpiredError) {
       return res.status(403).json({})

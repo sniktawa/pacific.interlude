@@ -31,13 +31,56 @@ export default function AlbumComponent({ album, albums, setAlbums }) {
     );
   };
 
+  const renameAlbum = () => {
+    Swal.fire({
+        title: 'Name:',
+        input: 'text',
+        inputValue: album.title,
+        showCancelButton: true,
+        showCloseButton: true,
+        confirmButtonText: `Rename`,
+        confirmButtonColor: '#000',
+    }).then(async (result) => {
+       if (result.isConfirmed && result?.value) {
+            try {
+                axios.defaults.headers.common["authorization"] = window.localStorage.getItem("token");
+                const res = await axios.post("/api/albums/rename", { id: album.id, title: result.value });
+                setAlbums((albums) => albums.map((a) => {
+                  if (a.id === album.id) {
+                    a.title = result.value;
+                  }
+                  return a;
+                }))
+            } catch (e) {
+                console.error(e)
+                if (e?.response && e?.response?.status === 403) {
+                    window.localStorage.removeItem("token")
+                    window.location.href = "/dashboard"
+                }
+            }
+       }
+    })
+  }
+
   return (
     <>
       <div className={`d-flex flex-column mt-4 ${styles.album}`}>
         <div
           className={`d-flex w-100 justify-content-between align-items-center flex-wrap`}
         >
-          <h5>{album.title}</h5>
+          <h5>
+            {album.title}
+            {album.title !== 'homepage' &&
+              <button
+              type="button"
+              className={`btn-black`}
+              style={{ borderRadius: '50%', fontSize: '8px', position: 'absolute', marginTop: '-8px' }}
+              onClick={renameAlbum}
+            >
+              <i className="fas fa-pencil-alt"></i>
+            </button>
+            }
+          </h5>
           <button
             type="button"
             className={`btn-black`}
@@ -48,7 +91,7 @@ export default function AlbumComponent({ album, albums, setAlbums }) {
         </div>
         <div
           className={`d-flex`}
-          style={{ overflowX: "scroll", overflowY: "hidden" }}
+          style={{ overflowX: album?.uploads && album.uploads.length < 1 ? "hidden" : "scroll", overflowY: "hidden" }}
         >
           {album?.uploads &&
             album.uploads.map((upload) => (
@@ -159,6 +202,7 @@ export const NewPhotoModal = (props) => {
         setPicSrc(imgUploadData.secure_url);
 
         data["img_src"] = imgUploadData.secure_url;
+        data["public_id"] = imgUploadData.public_id;
         data["album"] = props.album.id;
 
         axios.defaults.headers.common["authorization"] =

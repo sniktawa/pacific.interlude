@@ -15,7 +15,6 @@ export default function Dashboard() {
 
     const fetchAlbums = async () => {
         try {
-            axios.defaults.headers.common["authorization"] = window.localStorage.getItem("token");
             const res = await axios.get("/api/albums/fetch");
             setAlbums(res.data);
         } catch (e) {
@@ -47,6 +46,7 @@ export default function Dashboard() {
                 try {
                     axios.defaults.headers.common["authorization"] = window.localStorage.getItem("token");
                     const res = await axios.post("/api/albums/create", { title: result.value });
+                    fetchAlbums()
                 } catch (e) {
                     console.error(e)
                     if (e?.response && e?.response?.status === 403) {
@@ -59,7 +59,7 @@ export default function Dashboard() {
     }
 
     return (
-        <div className={`d-flex w-100 flex-column p-5`}>
+        <div className={`d-flex w-100 flex-column dashboard`}>
             <div className={`d-flex w-100 justify-content-end mb-3`}>
                 <button type="button" className="btn-black" onClick={createAlbum}>Create Album</button>
             </div>
