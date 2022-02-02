@@ -6,6 +6,21 @@ import NavComponent from '../../components/NavComponent';
 
 export default function Projects() {
 
+  const [albums, setAlbums] = useState(null)
+
+  const fetchAlbums = async () => {
+      try {
+          const res = await axios.get("/api/albums/fetch");
+          setAlbums(res.data);
+      } catch (e) {
+          console.error(e)
+      }
+  }
+
+  useEffect(() => {
+      if (!albums) fetchAlbums();
+  }, [])
+
   return (
     <>
     <div className="grain"></div>

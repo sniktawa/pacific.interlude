@@ -52,7 +52,15 @@ export default function Home() {
       albums[0].uploads.map((upload, index) => {
           return (
           <SplideSlide key={index}>
-            <img src={upload.img_src} alt={upload?.title || upload.img_src} />
+            <div className={`d-flex w-100 h-100`} style={{ position: 'relative' }}>
+              <img src={upload.img_src} alt={upload?.title || upload.img_src} />
+              {(upload?.title || upload?.description) &&
+              <div className={`d-flex flex-column descriptor`}>
+                <h1>{upload?.title}</h1>
+                <h5>{upload?.description}</h5>
+              </div>
+              }
+            </div>
           </SplideSlide>
         )})
       }
