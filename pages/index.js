@@ -12,6 +12,24 @@ export default function Home() {
   const [loaded, setLoaded] = useState(false)
   const [albums, setAlbums] = useState(false)
 
+  useEffect(() => {
+    if (typeof document != 'undefined') {
+      window.addEventListener('wheel', listenToScroll)
+    }
+  }, [])
+
+  const listenToScroll = (e) => {
+    const track = document.getElementsByClassName('splide__list')[0]
+
+    if (e?.deltaY && e.deltaY > 0) {
+      var ev = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowRight", char : "ArrowRight", shiftKey : false});
+      track.dispatchEvent(ev);
+    } else if (e?.deltaY && e.deltaY < 0) {
+      var ev = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowLeft", char : "ArrowLeft", shiftKey : false});
+      track.dispatchEvent(ev);
+    }
+  }
+
   const fetchAlbums = async () => {
     try {
         const res = await axios.get("/api/albums/fetch");
