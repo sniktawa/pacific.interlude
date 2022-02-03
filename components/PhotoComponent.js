@@ -60,7 +60,7 @@ export default function PhotoComponent({ photo, removePhoto, albums, addPhoto })
       >
         <i className="fa fa-bars" />
       </button>
-      <img src={photo.img_src} />
+      <img src={photo.img_src} loading="lazy" />
     </div>
     <NewPhotoModal isOpen={uploadModalOpen} setOpen={setUploadModalOpen} photo={photo} albums={albums} removePhoto={removePhoto} addPhoto={addPhoto} />
     </>

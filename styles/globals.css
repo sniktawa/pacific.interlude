@@ -153,9 +153,40 @@ a::before {
   opacity: 0;
 }
 
+.projectsImageDiv {
+  height: calc(100% - 3rem);
+  position: relative;
+  padding: 2rem !important;
+}
+
+.projectsImageDiv img {
+  padding: 0rem !important;
+}
+
+.projectsImageOverlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  top: 0;
+  left: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.projectsImageOverlay h1 {
+  color: white;
+}
+
+.projectsImageOverlay.visible {
+  opacity: 1;
+}
+
 @media screen and (max-width: 420px) {
   .hide-mobile {
     display: none;
+  }
+
+  .projectsImageDiv {
+    height: 100% !important;
   }
 }
 

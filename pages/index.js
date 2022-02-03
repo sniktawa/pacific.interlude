@@ -23,10 +23,14 @@ export default function Home() {
 
     if (e?.deltaY && e.deltaY > 0) {
       var ev = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowRight", char : "ArrowRight", shiftKey : false});
-      track.dispatchEvent(ev);
+      if (track) {
+        track.dispatchEvent(ev);
+      }
     } else if (e?.deltaY && e.deltaY < 0) {
       var ev = new KeyboardEvent("keydown", {bubbles : true, cancelable : true, key : "ArrowLeft", char : "ArrowLeft", shiftKey : false});
-      track.dispatchEvent(ev);
+      if (track) {
+        track.dispatchEvent(ev);
+      }
     }
   }
 
@@ -40,7 +44,6 @@ export default function Home() {
           const img = new Image();
           img.src = url;
           img.onload = () => {
-            console.log("LOADING COMPLETED")
             if (!loadedUrls.includes(url)) {
               setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
             }
