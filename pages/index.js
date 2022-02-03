@@ -120,6 +120,8 @@ export default function Home() {
 
   const isMobile = width < 420;
 
+  alert(isMobile ? "Mobile screen " + width : "Desktop screen " + width)
+
   return (
     <>
     <div className="grain"></div>
