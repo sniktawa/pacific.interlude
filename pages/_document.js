@@ -22,7 +22,7 @@ class MyDocument extends Document {
             <link rel="icon" href="/favicon.ico" />
             <link rel="manifest" href="/site.webmanifest" />
         </Head>
-        <body id="root">
+        <body id="root" className="overflowHide">
           <Main />
           <NextScript />
         </body>

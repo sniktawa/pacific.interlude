@@ -24,6 +24,9 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (!albums) fetchAlbums();
+        if (typeof document != 'undefined') {
+            document.getElementById('root').classList.remove('overflowHide')
+        }
     }, [])
 
 
