@@ -195,7 +195,7 @@ a::before {
   opacity: 1;
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 620px) {
   .hide-mobile {
     display: none;
   }
@@ -348,7 +348,7 @@ a::before {
   padding: 3rem;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 620px) {
   .dashboard {
     padding: 1rem !important;
   }
@@ -373,10 +373,10 @@ a::before {
   font-weight: bold;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 620px) {
   .plack {
     bottom: 8rem;
-    font-size: 12px;
+    font-size: 8px;
   }
 }
 
