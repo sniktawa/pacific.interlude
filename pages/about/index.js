@@ -38,7 +38,7 @@ export default function About() {
       </div>
 
       <div className={`plack`}>
-        <a href="https://colbymchenry.com" target="_blank">Web Design by Colby McHenry</a>
+        <a href="https://colbymchenry.com" target="_blank" rel="noreferrer">Web Design by Colby McHenry</a>
       </div>
     </div>
     </>
