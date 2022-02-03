@@ -5,12 +5,15 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Link from 'next/link';
 import axios from 'axios'
 import NavComponent from '../components/NavComponent';
+import useWindowDimensions from './../components/DimensionsHook';
 
 export default function Home() {
 
   const [loadedUrls, setLoadedUrls] = useState([])
   const [loaded, setLoaded] = useState(false)
   const [albums, setAlbums] = useState(false)
+  const { height, width } = typeof document != 'undefined' ? useWindowDimensions() : { width: 0, height: 0 };
+
 
   useEffect(() => {
     if (typeof document != 'undefined') {
@@ -60,7 +63,7 @@ export default function Home() {
     }
   }, [])
 
-  const renderImages = () => {
+  const renderDesktopImages = () => {
     return (
       <Splide className={`h-100 w-100 ${styles.sliderWide}`} options={ {
         gap   : '-40px',
@@ -79,6 +82,15 @@ export default function Home() {
       }
     </Splide>
     )
+  }
+
+  const renderMobileImages = () => {
+    return albums[0].uploads.map((upload, index) => {
+          return (
+          <div className={`d-flex w-100 p-2`} key={index}>
+            <img src={upload.img_src} alt={upload?.title || upload.img_src} style={{ width: '100%', height: 'auto' }} />
+          </div>
+        )})
   }
 
   const renderProgressBar = () => {
@@ -106,6 +118,8 @@ export default function Home() {
 
   if (!albums) return <></>
 
+  const isMobile = width < 420;
+
   return (
     <>
     <div className="grain"></div>
@@ -120,8 +134,8 @@ export default function Home() {
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <NavComponent />
-        <div className={`h-100 d-100`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
-          {renderImages()}
+        <div className={`h-100 d-100 ${isMobile ? 'd-flex flex-column m-1' : ''}`} style={{ maxHeight: 'calc(100% - 3rem)', overflowY: isMobile ? 'scroll' : 'hidden' }}>
+          {isMobile ? renderMobileImages() : renderDesktopImages()}
         </div>
       </div>
     </div>

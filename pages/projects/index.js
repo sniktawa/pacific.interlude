@@ -6,6 +6,7 @@ import NavComponent from '../../components/NavComponent';
 import axios from 'axios';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useRouter } from 'next/router';
+import useWindowDimensions from './../../components/DimensionsHook';
 
 export default function Projects() {
 
@@ -14,6 +15,8 @@ export default function Projects() {
   const [albums, setAlbums] = useState(false)
   const [selectedAlbum, setSelectedAlbum] = useState(null)
   const router = useRouter();
+  const { height, width } = typeof document != 'undefined' ? useWindowDimensions() : { width: 0, height: 0 };
+
 
   useEffect(() => {
     if (typeof document != 'undefined') {
@@ -64,7 +67,29 @@ export default function Projects() {
     }
   }, [])
 
-  const renderImages = () => {
+  const renderMobileImages = () => {
+    
+    return albums.filter((album) => album.uploads.length > 0 && album.id !== 1).map((album) => {
+        let upload = album.uploads[0]
+        return (
+          <div className={`d-flex w-100 p-2`} key={upload.id} style={{ position: 'relative' }} onClick={() => {
+              if (selectedAlbum && selectedAlbum.id === album.id) {
+                router.push(`/project/${album.id}`)
+              } else {
+                setSelectedAlbum(album)
+              }
+            }}>
+              <div className={`d-flex w-100 h-100`} style={{ position: 'relative' }}>
+                <img src={upload.img_src} alt={upload?.title || upload.img_src} style={{ width: '100%', height: 'auto' }} />
+                <div className={`d-flex w-100 h-100 justify-content-center align-items-center projectsImageOverlay ${selectedAlbum && selectedAlbum.id === album.id ? 'visible' : ''}`}>
+                  <h1>{album.title}</h1>
+                </div>
+              </div>
+          </div>
+        )})
+  }
+
+  const renderDesktopImages = () => {
     return (
       <Splide className={`h-100 w-100 ${styles.sliderWide}`} options={ {
         gap   : '-40px',
@@ -127,6 +152,8 @@ export default function Projects() {
 
   if (!albums) return <></>
 
+  const isMobile = width < 420;
+  
   return (
     <>
     <div className="grain"></div>
@@ -141,8 +168,8 @@ export default function Projects() {
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <NavComponent />
-        <div className={`h-100 d-100`} style={{ height: 'calc(100% - 3rem)' }}>
-          {renderImages()}
+        <div className={`h-100 d-100 ${isMobile ? 'd-flex flex-column m-1' : ''}`} style={{ maxHeight: 'calc(100% - 3rem)', overflowY: isMobile ? 'scroll' : 'hidden' }}>
+          {isMobile ? renderMobileImages() : renderDesktopImages()}
         </div>
       </div>
     </div>

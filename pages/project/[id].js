@@ -6,6 +6,7 @@ import NavComponent from '../../components/NavComponent';
 import axios from 'axios';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useRouter } from 'next/router'
+import useWindowDimensions from './../../components/DimensionsHook';
 
 export default function Projects() {
 
@@ -13,6 +14,7 @@ export default function Projects() {
   const [loaded, setLoaded] = useState(false)
   const [albums, setAlbums] = useState(false)
   const [album, setAlbum] = useState(null)
+  const { height, width } = typeof document != 'undefined' ? useWindowDimensions() : { width: 0, height: 0 };
 
   const router = useRouter()
   const { id } = router.query
@@ -66,7 +68,8 @@ export default function Projects() {
     }
   }, [])
 
-  const renderImages = () => {
+  
+  const renderDesktopImages = () => {
     return (
       <Splide className={`h-100 w-100 ${styles.sliderWide}`} options={ {
         gap   : '-40px',
@@ -76,20 +79,24 @@ export default function Projects() {
         height: '100%',
       } }> 
       {
-        album.uploads.map((upload) => {
+      album.uploads.map((upload, index) => {
           return (
-            <SplideSlide key={upload.id}>
-                <div className={`d-flex p-2 projectsImageDiv`} style={{ width: '100%',  maxWidth: '80vw' }}>
-                  <div className={`d-flex w-100 h-100`} style={{ position: 'relative' }}>
-                    <img src={upload.img_src} className={`h-100`} style={{ objectFit: 'cover', width: '100%', maxWidth: '100%', height: '100%' }} />
-                  </div>
-                </div>
-            </SplideSlide>
-          )
-        })
+          <SplideSlide key={index}>
+            <img src={upload.img_src} alt={upload?.title || upload.img_src} />
+          </SplideSlide>
+        )})
       }
     </Splide>
     )
+  }
+
+  const renderMobileImages = () => {
+    return album.uploads.map((upload, index) => {
+          return (
+          <div className={`d-flex w-100 p-2`} key={index}>
+            <img src={upload.img_src} alt={upload?.title || upload.img_src} style={{ width: '100%', height: 'auto' }} />
+          </div>
+        )})
   }
 
   if (!albums || !album) return <></>
@@ -117,6 +124,8 @@ export default function Projects() {
     )
   }
 
+  const isMobile = width < 420;
+
   return (
     <>
     <div className="grain"></div>
@@ -131,8 +140,8 @@ export default function Projects() {
 
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <NavComponent />
-        <div className={`h-100 d-100`} style={{ height: 'calc(100% - 3rem)' }}>
-          {renderImages()}
+        <div className={`h-100 d-100 ${isMobile ? 'd-flex flex-column m-1' : ''}`} style={{ maxHeight: 'calc(100% - 3rem)', overflowY: isMobile ? 'scroll' : 'hidden' }}>
+          {isMobile ? renderMobileImages() : renderDesktopImages()}
         </div>
       </div>
     </div>

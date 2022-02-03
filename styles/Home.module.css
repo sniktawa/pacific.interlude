@@ -22,7 +22,13 @@
   border-top-left-radius: 6rem;
   padding-top: 1rem;
   padding-left: 1rem;
-  margin-left: 0.3rem;
+  margin-left: calc(0.2rem);
+}
+
+@media screen and (max-width: 720px) {
+  .navBar {
+    margin-left: calc(0.4rem);
+  }
 }
 
 .navBar a {
