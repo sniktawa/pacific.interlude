@@ -371,12 +371,12 @@ a::before {
   right: 2rem;
   bottom: 2rem;
   font-weight: bold;
+  font-size: clamp(12px, 2vw, 24px);
 }
 
 @media (max-width: 620px) {
   .plack {
     bottom: 8rem;
-    font-size: 8px;
   }
 }
 
