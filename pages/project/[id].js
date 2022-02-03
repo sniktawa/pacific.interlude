@@ -5,15 +5,17 @@ import Link from 'next/link';
 import NavComponent from '../../components/NavComponent';
 import axios from 'axios';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
 export default function Projects() {
 
   const [loadedUrls, setLoadedUrls] = useState([])
   const [loaded, setLoaded] = useState(false)
   const [albums, setAlbums] = useState(false)
-  const [selectedAlbum, setSelectedAlbum] = useState(null)
-  const router = useRouter();
+  const [album, setAlbum] = useState(null)
+
+  const router = useRouter()
+  const { id } = router.query
 
   useEffect(() => {
     if (typeof document != 'undefined') {
@@ -41,9 +43,9 @@ export default function Projects() {
     try {
         const res = await axios.get("/api/albums/fetch");
         setAlbums(res.data);
-        
-        res.data.filter((album) => album.uploads.length > 0 && album.id !== 1).forEach((album) => {
-          let upload = album.uploads[0];
+        let a = res.data.filter((album) => album.uploads.length > 0 && album.id == parseInt(id))[0];
+        setAlbum(a)
+        a.uploads.forEach((upload) => {
           let url = upload.img_src;
           const img = new Image();
           img.src = url;
@@ -59,7 +61,7 @@ export default function Projects() {
 }
 
   useEffect(() => {
-    if (!albums) {
+    if (!albums && id) {
       fetchAlbums();
     }
   }, [])
@@ -74,24 +76,12 @@ export default function Projects() {
         height: '100%',
       } }> 
       {
-        albums.filter((album) => album.uploads.length > 0 && album.id !== 1).map((album) => {
-          let upload = album.uploads[0]
+        album.uploads.map((upload) => {
           return (
-            <SplideSlide key={album.title}>
+            <SplideSlide key={upload.id}>
                 <div className={`d-flex p-2 projectsImageDiv`} style={{ width: '100%',  maxWidth: '80vw' }}>
-                  <div className={`d-flex w-100 h-100`} style={{ position: 'relative' }} onMouseEnter={() => {
-                    setSelectedAlbum(album)
-                  }} onClick={() => {
-                      if (selectedAlbum === album) {
-                        router.push(`/project/${album.id}`)
-                      } else {
-                        setSelectedAlbum(album)
-                      }
-                    }}>
+                  <div className={`d-flex w-100 h-100`} style={{ position: 'relative' }}>
                     <img src={upload.img_src} className={`h-100`} style={{ objectFit: 'cover', width: '100%', maxWidth: '100%', height: '100%' }} />
-                    <div className={`d-flex w-100 h-100 justify-content-center align-items-center projectsImageOverlay ${selectedAlbum && selectedAlbum.id === album.id ? 'visible' : ''}`}>
-                      <h1>{album.title}</h1>
-                    </div>
                   </div>
                 </div>
             </SplideSlide>
@@ -102,8 +92,10 @@ export default function Projects() {
     )
   }
 
+  if (!albums || !album) return <></>
+
   const renderProgressBar = () => {
-    const progress = Math.round(((loadedUrls.length / albums[0].uploads.length) * 100) / 10);
+    const progress = Math.round(((loadedUrls.length / album.uploads.length) * 100) / 10);
     const blocks = []
 
     for (var i = 0; i < progress; i++) {
@@ -111,7 +103,7 @@ export default function Projects() {
     }
 
     return (
-      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == albums.filter((album) => album.uploads.length > 0 && album.id !== 1).length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
+      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == album.uploads.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
           <div className={`d-flex ${styles.progressBar}`}>
@@ -124,8 +116,6 @@ export default function Projects() {
       </div>
     )
   }
-
-  if (!albums) return <></>
 
   return (
     <>

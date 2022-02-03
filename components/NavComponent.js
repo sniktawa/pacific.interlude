@@ -12,9 +12,9 @@ export default function NavComponent() {
         <div className={`d-flex justify-content-between align-items-center ${styles.navBar}`}>
             <div className={`d-flex align-items-end`} style={{ marginTop: '1.5rem' }}>
               <Link href="/" passHref><a className={'hide-mobile'}>PACIFIC INTERLUDE</a></Link>
-              <Link href="/projects" passHref><a>PROJECTS</a></Link>
-              <Link href="/about" passHref><a>ABOUT</a></Link>
-              <Link href="/contact" passHref><a>CONTACT</a></Link>
+              <Link href="/projects" passHref><a className={`${router.pathname === '/projects' ? 'active' : ''}`}>PROJECTS</a></Link>
+              <Link href="/about" passHref><a className={`${router.pathname === '/about' ? 'active' : ''}`}>ABOUT</a></Link>
+              <Link href="/contact" passHref><a className={`${router.pathname === '/contact' ? 'active' : ''}`}>CONTACT</a></Link>
             </div>
             <div className={`d-flex align-items-center h-100 ${styles.icon}`}>
               <img src="/images/LogoBlack.png" alt="Logo" width={32} height={32} onClick={() => router.push('/')} style={{ cursor: 'pointer' }} />

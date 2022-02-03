@@ -36,6 +36,10 @@ export default function About() {
           </p>
         </div>
       </div>
+
+      <div className={`plack`}>
+        <a href="https://colbymchenry.com" target="_blank">Web Design by Colby McHenry</a>
+      </div>
     </div>
     </>
   )
