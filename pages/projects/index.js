@@ -152,7 +152,7 @@ export default function Projects() {
 
   if (!albums) return <></>
 
-  const isMobile = width < 420;
+  const isMobile = width < 620;
   
   return (
     <>

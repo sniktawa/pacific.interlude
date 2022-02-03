@@ -124,7 +124,7 @@ export default function Projects() {
     )
   }
 
-  const isMobile = width < 420;
+  const isMobile = width < 620;
 
   return (
     <>

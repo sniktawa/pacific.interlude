@@ -118,9 +118,7 @@ export default function Home() {
 
   if (!albums) return <></>
 
-  const isMobile = width < 420;
-
-  alert(isMobile ? "Mobile screen " + width : "Desktop screen " + width)
+  const isMobile = width < 620;
 
   return (
     <>
