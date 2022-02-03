@@ -15,7 +15,7 @@ export default function Projects() {
   const [albums, setAlbums] = useState(false)
   const [selectedAlbum, setSelectedAlbum] = useState(null)
   const router = useRouter();
-  const { height, width } = typeof document != 'undefined' ? useWindowDimensions() : { width: 0, height: 0 };
+  const { height, width } = useWindowDimensions();
 
 
   useEffect(() => {

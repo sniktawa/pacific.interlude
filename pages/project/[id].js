@@ -14,7 +14,7 @@ export default function Projects() {
   const [loaded, setLoaded] = useState(false)
   const [albums, setAlbums] = useState(false)
   const [album, setAlbum] = useState(null)
-  const { height, width } = typeof document != 'undefined' ? useWindowDimensions() : { width: 0, height: 0 };
+  const { height, width } = useWindowDimensions();
 
   const router = useRouter()
   const { id } = router.query
