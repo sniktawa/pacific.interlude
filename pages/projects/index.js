@@ -157,7 +157,7 @@ export default function Projects() {
   const isMobile = width < 620 || (typeof document != 'undefined' && window.innerWidth < 620);
   
   return (
-     <Div100vh>
+    <>
     <div className="grain"></div>
     <div className={styles.container + " loadingScreen"} style={{ height: isMobile ? hh2 - 20 : '100vh' }}>
       <Head>
@@ -175,6 +175,6 @@ export default function Projects() {
         </div>
       </div>
     </div>
-    </Div100vh>
+    </>
   )
 }
