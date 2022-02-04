@@ -6,8 +6,6 @@ import Link from 'next/link';
 import axios from 'axios'
 import NavComponent from '../components/NavComponent';
 import useWindowDimensions from './../components/DimensionsHook';
-import Div100vh from 'react-div-100vh';
-import { MobileFullScreen } from './../components/MobileFullScreen';
 import { use100vh } from 'react-div-100vh'
 
 export default function Home() {
@@ -106,12 +104,7 @@ export default function Home() {
     }
 
     return (
-      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == albums[0].uploads.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => {
-        setLoaded(true)
-        if (typeof document != 'undefined') {
-          alert(window.innerHeight + ":" + window.innerWidth)
-        }
-      }}>
+      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == albums[0].uploads.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
           <div className={`d-flex ${styles.progressBar}`}>
