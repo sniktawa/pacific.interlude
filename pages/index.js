@@ -6,6 +6,7 @@ import Link from 'next/link';
 import axios from 'axios'
 import NavComponent from '../components/NavComponent';
 import useWindowDimensions from './../components/DimensionsHook';
+import Div100vh from 'react-div-100vh';
 
 export default function Home() {
 
@@ -126,11 +127,11 @@ export default function Home() {
   const isMobile = width < 620 || (typeof document != 'undefined' && window.innerWidth < 620);
 
   if (typeof document != 'undefined') {
-    document.getElementById('root').style.height = window.innerHeight
+    // document.getElementById('root').style.height = window.innerHeight
   }
 
   return (
-    <>
+    <Div100vh>
     <div className="grain"></div>
     <div className={styles.container + " loadingScreen"}>
       <Head>
@@ -148,6 +149,6 @@ export default function Home() {
         </div>
       </div>
     </div>
-    </>
+    </Div100vh>
   )
 }

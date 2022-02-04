@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useRouter } from 'next/router';
 import useWindowDimensions from './../../components/DimensionsHook';
+import Div100vh from 'react-div-100vh';
 
 export default function Projects() {
 
@@ -151,11 +152,11 @@ export default function Projects() {
   }
 
   if (!albums) return <></>
-  
+
   const isMobile = width < 620 || (typeof document != 'undefined' && window.innerWidth < 620);
   
   return (
-    <>
+     <Div100vh>
     <div className="grain"></div>
     <div className={styles.container + " loadingScreen"}>
       <Head>
@@ -173,6 +174,6 @@ export default function Projects() {
         </div>
       </div>
     </div>
-    </>
+    </Div100vh>
   )
 }
