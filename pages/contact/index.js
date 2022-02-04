@@ -4,10 +4,12 @@ import styles from '../../styles/Home.module.css'
 import Link from 'next/link';
 import NavComponent from '../../components/NavComponent';
 import { use100vh } from 'react-div-100vh'
+import useWindowDimensions from './../../components/DimensionsHook';
 
 export default function Contact() {
 
   const hh2 = use100vh()
+  const { height, width } =  useWindowDimensions();
   const isMobile = width < 620 || (typeof document != 'undefined' && window.innerWidth < 620);
 
   return (
