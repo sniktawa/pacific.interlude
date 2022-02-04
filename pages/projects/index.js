@@ -151,8 +151,8 @@ export default function Projects() {
   }
 
   if (!albums) return <></>
-
-  const isMobile = width < 620;
+  
+  const isMobile = width < 620 || (typeof document != 'undefined' && window.innerWidth < 620);
   
   return (
     <>

@@ -118,7 +118,11 @@ export default function Home() {
 
   if (!albums) return <></>
 
-  const isMobile = width < 620;
+  const isMobile = width < 620 || (typeof document != 'undefined' && window.innerWidth < 620);
+
+  if (typeof document != 'undefined') {
+    document.getElementById('root').style.height = window.innerHeight
+  }
 
   return (
     <>

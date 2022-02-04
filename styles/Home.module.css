@@ -68,9 +68,9 @@
 }
 
 @media screen and (max-width: 620px) {
-  .body {
+  /* .body {
     height: calc(100% - 6rem) !important;
-  }
+  } */
 }
 
 .about h5 {
