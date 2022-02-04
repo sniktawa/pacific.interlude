@@ -102,7 +102,12 @@ export default function Home() {
     }
 
     return (
-      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == albums[0].uploads.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
+      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == albums[0].uploads.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => {
+        setLoaded(true)
+        if (typeof document != 'undefined') {
+          alert(window.innerHeight + ":" + window.innerWidth)
+        }
+      }}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
           <div className={`d-flex ${styles.progressBar}`}>
