@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     if (position) {
       const albumPhotosResult = await excuteQuery({ query: `SELECT * FROM uploads WHERE album='${req.body.album}' ORDER BY position DESC`, values: []})
       await Promise.all(albumPhotosResult.map(async (photoResult) => {
-        if (photoResult.position > position) {
+        if (photoResult.position >= position) {
           await excuteQuery({ query: `UPDATE uploads SET position='${photoResult.position + 1}' WHERE id='${photoResult.id}'`, values: [] })
         }
       }))
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
 
     const results = await excuteQuery({ query: `UPDATE uploads SET title='${req.body.title}', description='${req.body.description}', album='${req.body.album}'${position ? `, position=${position}` : ''} WHERE id='${req.body.id}'`, values: [] })
-    const result = await excuteQuery({ query: `SELECT * FROM uploads WHERE id='${req.body.id} ORDER BY position DESC'`, values: []});
+    const result = await excuteQuery({ query: `SELECT * FROM uploads WHERE id='${req.body.id} ORDER BY position ASC'`, values: []});
     return res.json(result)
   } catch (e) {
     if (e instanceof TokenExpiredError) {

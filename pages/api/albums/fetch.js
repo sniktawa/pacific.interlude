@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   try {
     const results = await excuteQuery({ query: `SELECT * FROM albums`, values: [] })
     let result = await Promise.all(results.map(async (album) => {
-      album['uploads'] = await excuteQuery({ query: `SELECT * FROM uploads WHERE album='${album.id}' ORDER BY position DESC`, values: []})
+      album['uploads'] = await excuteQuery({ query: `SELECT * FROM uploads WHERE album='${album.id}' ORDER BY position ASC`, values: []})
       return album;
     }))
     return res.json(result)
