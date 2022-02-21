@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
 
     const results = await excuteQuery({ query: `UPDATE uploads SET title='${req.body.title}', description='${req.body.description}', album='${req.body.album}'${position ? `, position=${position}` : ''} WHERE id='${req.body.id}'`, values: [] })
-    const result = await excuteQuery({ query: `SELECT * FROM uploads WHERE id='${req.body.id}'`, values: []});
+    const result = await excuteQuery({ query: `SELECT * FROM uploads WHERE id='${req.body.id} ORDER BY position DESC'`, values: []});
     return res.json(result)
   } catch (e) {
     if (e instanceof TokenExpiredError) {
