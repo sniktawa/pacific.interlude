@@ -295,6 +295,22 @@ export const NewPhotoModal = (props) => {
               }`}
             />
           </div>
+          <div className={`d-flex w-100 flex-column mt-3`}>
+            <label htmlFor="position" className={`form-label`}>
+              Position
+            </label>
+            <input
+              {...register("position", { required: false })}
+              id="position"
+              type="number"
+              min={0}
+              step={1}
+              placeholder="1"
+              className={`form-control ${
+                errors?.position ? "is-invalid" : ""
+              }`}
+            />
+          </div>
         </div>
         {!props?.photo ? (
           <div className={`d-flex flex-column mb-3`}>
