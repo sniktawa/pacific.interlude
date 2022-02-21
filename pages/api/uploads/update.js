@@ -11,11 +11,11 @@ export default async function handler(req, res) {
 
     if (position) {
       const albumPhotosResult = await excuteQuery({ query: `SELECT * FROM uploads WHERE album='${req.body.album}' ORDER BY position DESC`, values: []})
-      albumPhotosResult.map((photoResult) => {
+      await Promise.all(albumPhotosResult.map(async (photoResult) => {
         if (photoResult.position > position) {
           await excuteQuery({ query: `UPDATE uploads SET position='${photoResult.position + 1}' WHERE id='${photoResult.id}'`, values: [] })
         }
-      })
+      }))
     }
 
 
