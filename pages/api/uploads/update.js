@@ -1,27 +1,38 @@
-import excuteQuery from "../../../lib/db"
 import jwt from 'jsonwebtoken';
 import { TokenExpiredError } from "jsonwebtoken";
+import {getAlbums} from "../albums/fetch";
+import {FirebaseAdmin} from "../../../firebase/FirebaseAdmin";
 
 export default async function handler(req, res) {
 
   try {
     jwt.verify(req.headers["authorization"], process.env.JWT_SECRET)
 
-    let position = req?.body?.position;
+    let position = req?.body?.position ? parseInt(req.body.position) : undefined;
 
     if (position) {
-      const albumPhotosResult = await excuteQuery({ query: `SELECT * FROM uploads WHERE album='${req.body.album}' ORDER BY -position DESC`, values: []})
-      await Promise.all(albumPhotosResult.map(async (photoResult) => {
-        if (photoResult.position >= position) {
-          await excuteQuery({ query: `UPDATE uploads SET position='${photoResult.position + 1}' WHERE id='${photoResult.id}'`, values: [] })
-        }
-      }))
+      let albumPhotosResult = await getAlbums();
+      albumPhotosResult = albumPhotosResult.find(({id}) => id == req.body.album);
+      if (albumPhotosResult && albumPhotosResult?.uploads && albumPhotosResult.uploads.length) {
+        await Promise.all(albumPhotosResult["uploads"].map(async (photoResult) => {
+          if (parseInt(photoResult.position) >= position) {
+            await FirebaseAdmin.firestore().collection("uploads").doc(photoResult.id).update({
+              position: parseInt(photoResult.position) + 1
+            })
+          }
+        }))
+      }
     }
 
+    await FirebaseAdmin.firestore().collection("uploads").doc(req.body.id).update({
+      title: req.body.title,
+      description: req.body.description,
+      album: req.body.album,
+      ...(position && { position: parseInt(position) })
+    })
 
-    const results = await excuteQuery({ query: `UPDATE uploads SET title='${req.body.title}', description='${req.body.description}', album='${req.body.album}'${position ? `, position=${position}` : ''} WHERE id='${req.body.id}'`, values: [] })
-    const result = await excuteQuery({ query: `SELECT * FROM uploads WHERE id='${req.body.id} ORDER BY -position DESC'`, values: []});
-    return res.json(result)
+    const result = await FirebaseAdmin.firestore().collection("uploads").doc(req.body.id).get();
+    return res.json({id: req.body.id, ...result.data()})
   } catch (e) {
     if (e instanceof TokenExpiredError) {
       return res.status(403).json({})

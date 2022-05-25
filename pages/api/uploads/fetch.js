@@ -1,12 +1,12 @@
-import excuteQuery from "../../../lib/db"
 import jwt from 'jsonwebtoken';
 import { TokenExpiredError } from "jsonwebtoken";
+import {FirebaseAdmin} from "../../../firebase/FirebaseAdmin";
 
 export default async function handler(req, res) {
 
   try {
     jwt.verify(req.headers["authorization"], process.env.JWT_SECRET)
-    const results = await excuteQuery({ query: `SELECT * FROM albums`, values: [] })
+    const results = await FirebaseAdmin.getCollectionArray("albums");
     return res.json(results)
   } catch (e) {
     if (e instanceof TokenExpiredError) {

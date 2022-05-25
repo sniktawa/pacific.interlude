@@ -2,6 +2,7 @@ import excuteQuery from "../../../lib/db"
 import jwt from 'jsonwebtoken';
 import { TokenExpiredError } from "jsonwebtoken";
 import cloudinary from 'cloudinary'
+import {FirebaseAdmin} from "../../../firebase/FirebaseAdmin";
 
 export default async function handler(req, res) {
   
@@ -13,14 +14,15 @@ export default async function handler(req, res) {
 
   try {
     jwt.verify(req.headers["authorization"], process.env.JWT_SECRET)
-    const photoRow = await excuteQuery({ query: `SELECT * FROM uploads WHERE id=${req.body.id}`, values: []})
+    let photo = await FirebaseAdmin.firestore().collection("uploads").doc(req.body.id).get();
+    photo = photo.data();
 
-    cloudinary.v2.api.delete_resources([photoRow[0].public_id], (result) => {
+    cloudinary.v2.api.delete_resources([photo.public_id], (result) => {
       console.log(result)
     });
 
-    const results = await excuteQuery({ query: `DELETE FROM uploads WHERE id='${req.body.id}'`, values: [] })
-    return res.json(results)
+    await FirebaseAdmin.firestore().collection("uploads").doc(req.body.id).delete();
+    return res.json({});
   } catch (e) {
     if (e instanceof TokenExpiredError) {
       return res.status(403).json({})

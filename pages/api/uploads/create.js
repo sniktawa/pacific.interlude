@@ -1,14 +1,17 @@
-import excuteQuery from "../../../lib/db"
 import jwt from 'jsonwebtoken';
 import { TokenExpiredError } from "jsonwebtoken";
+import {FirebaseAdmin} from "../../../firebase/FirebaseAdmin";
 
 export default async function handler(req, res) {
 
   try {
     jwt.verify(req.headers["authorization"], process.env.JWT_SECRET)
-    const results = await excuteQuery({ query: `INSERT INTO uploads (title, description, album, img_src, public_id) VALUES (?, ?, ?, ?, ?)`, values: [req.body.title, req.body.description, req.body.album, req.body.img_src, req.body.public_id] })
-    const result = await excuteQuery({ query: `SELECT * FROM uploads WHERE id='${results.insertId}'`, values: []});
-    return res.json(result)
+    const photosInAlbum = await FirebaseAdmin.query("uploads", "album", "==", req.body.album)
+    req.body["position"] = photosInAlbum.length;
+    console.log(req.body)
+    const insert = await FirebaseAdmin.firestore().collection("uploads").add(req.body);
+    const result = await FirebaseAdmin.firestore().collection("uploads").doc(insert.id).get();
+    return res.json({id: insert.id, ...result.data()})
   } catch (e) {
     if (e instanceof TokenExpiredError) {
       return res.status(403).json({})
