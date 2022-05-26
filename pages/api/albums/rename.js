@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       FirebaseAdmin.firestore().collection("albums").doc(req.body.id).update({
         title: req.body.title
       })
-      return res.json({}) 
+      return res.json({})
     }
   } catch (e) {
     if (e instanceof TokenExpiredError) {

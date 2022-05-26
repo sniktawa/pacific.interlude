@@ -47,7 +47,7 @@ export default function Projects() {
         const res = await axios.get("/api/albums/fetch");
         setAlbums(res.data);
         
-        res.data.filter((album) => album.uploads.length > 0 && album.id !== 1).forEach((album) => {
+        res.data.filter((album) => album.uploads.length > 0 && album.id !== "1").forEach((album) => {
           let upload = album.uploads[0];
           let url = upload.img_src;
           const img = new Image();
@@ -71,7 +71,7 @@ export default function Projects() {
 
   const renderMobileImages = () => {
     
-    return albums.filter((album) => album.uploads.length > 0 && album.id !== 1).map((album) => {
+    return albums.filter((album) => album.uploads.length > 0 && album.id !== "1").map((album) => {
         let upload = album.uploads[0]
         return (
           <div className={`d-flex w-100 p-2`} key={upload.id} style={{ position: 'relative' }} onClick={() => {
@@ -101,7 +101,7 @@ export default function Projects() {
         height: '100%',
       } }> 
       {
-        albums.filter((album) => album.uploads.length > 0 && album.id !== 1).map((album) => {
+        albums.filter((album) => album.uploads.length > 0 && album.id !== "1").map((album) => {
           let upload = album.uploads[0]
           return (
             <SplideSlide key={album.title}>
@@ -138,7 +138,7 @@ export default function Projects() {
     }
 
     return (
-      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == albums.filter((album) => album.uploads.length > 0 && album.id !== 1).length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
+      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == albums.filter((album) => album.uploads.length > 0 && album.id !== "1").length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
           <div className={`d-flex ${styles.progressBar}`}>
