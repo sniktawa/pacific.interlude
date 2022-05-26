@@ -71,7 +71,7 @@ export default function AlbumComponent({album, albums, setAlbums}) {
                 >
                     <h5>
                         {album.title}
-                        {album.title !== 'homepage' &&
+                        {album.id !== '1' &&
                             <button
                                 type="button"
                                 className={`btn-black`}
