@@ -47,7 +47,7 @@ export default function Projects() {
     try {
         const res = await axios.get("/api/albums/fetch");
         setAlbums(res.data);
-        let a = res.data.filter((album) => album.uploads.length > 0 && album.id == parseInt(id))[0];
+        let a = res.data.filter((album) => album.uploads.length > 0 && album.id ==id)[0];
         setAlbum(a)
         a.uploads.forEach((upload) => {
           let url = upload.img_src;
