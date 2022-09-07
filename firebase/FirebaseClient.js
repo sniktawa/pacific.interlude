@@ -33,7 +33,15 @@ let firebaseAnalytics;
 
 if (typeof window !== 'undefined') {
     try {
-        firebaseApp = initializeApp(JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_CONFIG))
+        firebaseApp = initializeApp({
+            apiKey: "AIzaSyAxcxvR3yO7I_AkZCUV3lncfBgy2unOLeo",
+            authDomain: "pacific-interlude.firebaseapp.com",
+            projectId: "pacific-interlude",
+            storageBucket: "pacific-interlude.appspot.com",
+            messagingSenderId: "508796960985",
+            appId: "1:508796960985:web:5c27bf7d00b345c60d7ec8",
+            measurementId: "G-BJ6TDYNESL"
+        })
         firebaseAnalytics = getAnalytics(firebaseApp);
     } catch (error) {
         /*
