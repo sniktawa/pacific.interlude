@@ -1,8 +1,9 @@
 import admin from 'firebase-admin';
+import serviceAccount from './service_account.json';
 
 try {
     admin.initializeApp({
-        credential: admin.credential.cert(JSON.parse(process.env.NEXT_ADMIN_FIREBASE_CONFIG)),
+        credential: admin.credential.cert(serviceAccount),
     })
 
     admin.firestore().settings({

@@ -15,6 +15,7 @@ function compare(a, b) {
 }
 
 export async function getAlbums() {
+
   const albums = await FirebaseAdmin.getCollectionArray("albums");
 
   return await Promise.all(albums.map(async (album) => {
