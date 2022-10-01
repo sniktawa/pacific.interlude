@@ -27,7 +27,7 @@ export default function Contact() {
         <div className={`d-flex flex-column p-4 ${styles.about}`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
           <h5>contact us</h5>
           <div className={`d-flex align-items-center`}>
-            <p><a href="mailto:contact@pacificinterlude.com">contact@pacificinterlude.com</a></p>
+            <p><a href="mailto:work@pacificinterlude.com">work@pacificinterlude.com</a></p>
           </div>
           <h5>socials</h5>
           <div className={`d-flex align-items-center`}>
