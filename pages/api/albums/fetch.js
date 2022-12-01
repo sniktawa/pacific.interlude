@@ -1,6 +1,7 @@
 import {FirebaseAdmin} from "../../../firebase/FirebaseAdmin";
 
 function compare(a, b) {
+  if (!a?.position || !b?.position) return;
   // Use toUpperCase() to ignore character casing
   const bandA = parseInt(a.position);
   const bandB = parseInt(b.position);
@@ -16,14 +17,19 @@ function compare(a, b) {
 
 export async function getAlbums() {
 
-  const albums = await FirebaseAdmin.getCollectionArray("albums");
+  try {
+    const albums = await FirebaseAdmin.getCollectionArray("albums");
 
-  return await Promise.all(albums.map(async (album) => {
-    const photos = await FirebaseAdmin.query("uploads", "album", "==", album.id);
-    album['uploads'] = photos.length ? photos : [];
-    album['uploads'] = album['uploads'].sort(compare)
-    return album;
-  }));
+    return await Promise.all(albums.map(async (album) => {
+      const photos = await FirebaseAdmin.query("uploads", "album", "==", album.id);
+      album['uploads'] = photos.length ? photos : [];
+      album['uploads'] = album['uploads'].sort(compare)
+      return album;
+    }));
+  } catch (error) {
+    return [];
+  }
+
 }
 
 
