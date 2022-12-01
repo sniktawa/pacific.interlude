@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import axios from 'axios'
 import {FirebaseClient} from "../firebase/FirebaseClient";
 
-export default function LoginComponent() {
+export default function LoginComponent({setUser}) {
 
     const {register, handleSubmit, watch, setError, formState: {errors}} = useForm();
 
@@ -18,7 +18,7 @@ export default function LoginComponent() {
     const loginSubmit = async (data) => {
         try {
             await FirebaseClient.signIn(data.email, data.password);
-            window.location.href = "/dashboard"
+            setUser(FirebaseClient.auth().currentUser);
         } catch (e) {
             if (e?.response?.status === 400) {
                 setError("password", {

@@ -10,6 +10,7 @@ export default function Dashboard() {
 
     const { register, handleSubmit, watch, setError, formState: { errors } } = useForm();
     const [albums, setAlbums] = useState(null)
+    const [user, setUser] = useState(null);
 
     const fetchAlbums = async () => {
         try {
@@ -28,10 +29,6 @@ export default function Dashboard() {
         }
     }, [])
 
-
-    if (!FirebaseClient?.auth()?.currentUser) {
-        return <LoginComponent />
-    }
 
     const createAlbum = () => {
         Swal.fire({
@@ -53,12 +50,12 @@ export default function Dashboard() {
         })
     }
 
-    return (
+    return FirebaseClient?.auth()?.currentUser || user ? (
         <div className={`d-flex w-100 flex-column dashboard`}>
             <div className={`d-flex w-100 justify-content-end mb-3`}>
                 <button type="button" className="btn-black" onClick={createAlbum}>Create Album</button>
             </div>
             {albums && albums.map((album) => <AlbumComponent key={`album_${album.id}`} album={album} albums={albums} setAlbums={setAlbums} />) }
         </div>
-    )
+    ) :  <LoginComponent setUser={setUser} />
 }
