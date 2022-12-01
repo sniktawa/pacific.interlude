@@ -3,10 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "firebase deploy --only functions,hosting"
+    "lint": "next lint"
   },
   "dependencies": {
     "@splidejs/react-splide": "^0.6.19",
