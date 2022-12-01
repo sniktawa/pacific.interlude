@@ -1,7 +1,6 @@
 {
   "name": "pacific.interlude",
   "private": true,
-  "main": "server.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
@@ -15,21 +14,16 @@
     "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "browser-image-compression": "^1.0.17",
-    "cloudinary": "^1.28.1",
     "firebase": "^9.8.1",
     "firebase-admin": "^10.2.0",
-    "firebase-functions": "^3.23.0",
-    "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^3.1.2",
     "list-react-files": "^0.2.0",
-    "next": "^12.0.10",
+    "next": "^12.3.4",
     "nodemailer": "^6.7.2",
     "react": "17.0.2",
     "react-div-100vh": "^0.7.0",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.22.5",
     "react-modal": "^3.14.4",
-    "serverless-mysql": "^1.5.4",
     "sweetalert2": "^11.3.10"
   },
   "devDependencies": {

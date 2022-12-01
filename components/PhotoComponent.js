@@ -3,6 +3,7 @@ import styles from "../styles/Dashboard.module.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { NewPhotoModal } from "./AlbumComponent";
+import {FirebaseClient} from "../firebase/FirebaseClient";
 
 export default function PhotoComponent({ photo, removePhoto, albums, addPhoto }) {
 
@@ -21,9 +22,7 @@ export default function PhotoComponent({ photo, removePhoto, albums, addPhoto })
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          axios.defaults.headers.common["authorization"] =
-            window.localStorage.getItem("token");
-          const res = await axios.post("/api/uploads/delete", { id: photo.id });
+          await FirebaseClient.delete("uploads", photo.id);
           removePhoto(photo);
         } catch (e) {
           console.error(e);

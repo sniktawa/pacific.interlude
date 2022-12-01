@@ -28,20 +28,14 @@ import {
     updateDoc
 } from 'firebase/firestore';
 
+import {getStorage, ref, uploadBytes, deleteObject, listAll, getDownloadURL} from "firebase/storage";
+
 let firebaseApp;
 let firebaseAnalytics;
 
 if (typeof window !== 'undefined') {
     try {
-        firebaseApp = initializeApp({
-            apiKey: "AIzaSyAxcxvR3yO7I_AkZCUV3lncfBgy2unOLeo",
-            authDomain: "pacific-interlude.firebaseapp.com",
-            projectId: "pacific-interlude",
-            storageBucket: "pacific-interlude.appspot.com",
-            messagingSenderId: "508796960985",
-            appId: "1:508796960985:web:5c27bf7d00b345c60d7ec8",
-            measurementId: "G-BJ6TDYNESL"
-        })
+        firebaseApp = initializeApp(JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_CONFIG))
         firebaseAnalytics = getAnalytics(firebaseApp);
     } catch (error) {
         /*
@@ -56,10 +50,12 @@ if (typeof window !== 'undefined') {
 
 let firebaseDb;
 let firebaseAuth;
+let firebaseStorage;
 
 if (typeof window !== 'undefined') {
     firebaseDb = getFirestore(firebaseApp)
     firebaseAuth = getAuth();
+    firebaseStorage = getStorage();
 }
 
 export class FirebaseClient {
@@ -70,6 +66,12 @@ export class FirebaseClient {
 
     static auth() {
         return firebaseAuth;
+    }
+
+    static async uploadFile(fileData, path) {
+        const storageRef = ref(firebaseStorage, path);
+        await uploadBytes(storageRef, fileData);
+        return await getDownloadURL(ref(firebaseStorage, path));
     }
 
     static async createUser(email, password) {

@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Head from 'next/head'
-import styles from '../../styles/Dashboard.module.css'
-import Link from 'next/link';
-import { useForm } from "react-hook-form";
-import axios from 'axios'
+import React, {useEffect, useState} from 'react'
+import {useForm} from "react-hook-form";
 import LoginComponent from '../../components/LoginComponent';
 import Swal from 'sweetalert2';
 import AlbumComponent from '../../components/AlbumComponent';
+import {FirebaseClient} from "../../firebase/FirebaseClient";
+import axios from "axios";
 
 export default function Dashboard() {
 
@@ -16,6 +14,7 @@ export default function Dashboard() {
     const fetchAlbums = async () => {
         try {
             const res = await axios.get("/api/albums/fetch");
+            console.log(res.data)
             setAlbums(res.data);
         } catch (e) {
             console.error(e)
@@ -30,10 +29,8 @@ export default function Dashboard() {
     }, [])
 
 
-    if (typeof window !== 'undefined') {
-        if (!window.localStorage.getItem('token')) {
-            return <LoginComponent />
-        }
+    if (!FirebaseClient?.auth()?.currentUser) {
+        return <LoginComponent />
     }
 
     const createAlbum = () => {
@@ -47,15 +44,10 @@ export default function Dashboard() {
         }).then(async (result) => {
            if (result.isConfirmed && result?.value) {
                 try {
-                    axios.defaults.headers.common["authorization"] = window.localStorage.getItem("token");
-                    const res = await axios.post("/api/albums/create", { title: result.value });
+                    await FirebaseClient.add("albums", { title: result.value });
                     fetchAlbums()
                 } catch (e) {
-                    console.error(e)
-                    if (e?.response && e?.response?.status === 403) {
-                        window.localStorage.removeItem("token")
-                        window.location.href = "/dashboard"
-                    }
+                    console.error(e);
                 }
            }
         })

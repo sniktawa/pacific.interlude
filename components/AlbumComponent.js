@@ -1,11 +1,11 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Modal from "react-modal/lib/components/Modal";
 import styles from "../styles/Dashboard.module.css";
 import {useForm} from "react-hook-form";
-import axios from "axios";
 import Swal from "sweetalert2";
 import PhotoComponent from "./PhotoComponent";
 import imageCompression from 'browser-image-compression';
+import {FirebaseClient} from "../firebase/FirebaseClient";
 
 export default function AlbumComponent({album, albums, setAlbums}) {
     const [uploadModalOpen, setUploadModalOpen] = useState(false);
@@ -44,8 +44,9 @@ export default function AlbumComponent({album, albums, setAlbums}) {
         }).then(async (result) => {
             if (result.isConfirmed && result?.value) {
                 try {
-                    axios.defaults.headers.common["authorization"] = window.localStorage.getItem("token");
-                    const res = await axios.post("/api/albums/rename", {id: album.id, title: result.value});
+                    if (album.id !== "1" && album.id !== 1) {
+                        await FirebaseClient.update("albums", album.id, {title: result.value});
+                    }
                     setAlbums((albums) => albums.map((a) => {
                         if (a.id === album.id) {
                             a.title = result.value;
@@ -54,14 +55,32 @@ export default function AlbumComponent({album, albums, setAlbums}) {
                     }))
                 } catch (e) {
                     console.error(e)
-                    if (e?.response && e?.response?.status === 403) {
-                        window.localStorage.removeItem("token")
-                        window.location.href = "/dashboard"
-                    }
                 }
             }
         })
     }
+
+    const deleteAlbum = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            showCancelButton: true,
+            showCloseButton: true,
+            confirmButtonText: `Delete`,
+            confirmButtonColor: '#000',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    if (album.id !== "1" && album.id !== 1) {
+                        await FirebaseClient.delete("albums", album.id);
+                    }
+                    setAlbums((albums) => albums.filter((a) => a.id !== album.id));
+                } catch (e) {
+                    console.error(e)
+                }
+            }
+        })
+    }
+
 
     return (
         <>
@@ -72,14 +91,35 @@ export default function AlbumComponent({album, albums, setAlbums}) {
                     <h5>
                         {album.title}
                         {album.id !== '1' &&
-                            <button
-                                type="button"
-                                className={`btn-black`}
-                                style={{borderRadius: '50%', fontSize: '8px', position: 'absolute', marginTop: '-8px'}}
-                                onClick={renameAlbum}
-                            >
-                                <i className="fas fa-pencil-alt"></i>
-                            </button>
+                            <>
+                                <button
+                                    type="button"
+                                    className={`btn-black`}
+                                    style={{
+                                        borderRadius: '50%',
+                                        fontSize: '8px',
+                                        position: 'absolute',
+                                        marginTop: '-8px'
+                                    }}
+                                    onClick={renameAlbum}
+                                >
+                                    <i className="fas fa-pencil-alt"></i>
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`btn-black`}
+                                    style={{
+                                        borderRadius: '50%',
+                                        fontSize: '8px',
+                                        position: 'absolute',
+                                        marginTop: '-8px',
+                                        marginLeft: '30px'
+                                    }}
+                                    onClick={deleteAlbum}
+                                >
+                                    <i className="fas fa-trash"></i>
+                                </button>
+                            </>
                         }
                     </h5>
                     <button
@@ -173,66 +213,39 @@ export const NewPhotoModal = (props) => {
                 const fileInput = Array.from(form.elements).find(
                     ({name}) => name === "pic_src"
                 );
-                const formData = new FormData();
 
                 for (const file of fileInput.files) {
                     const options = {
-                        maxSizeMB: 20,
+                        maxSizeMB: 5,
                         maxWidthOrHeight: 1920,
                         useWebWorker: true
                     }
+
+                    let f = file;
+
                     try {
-                        const compressedFile = await imageCompression(file, options);
-                        console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-                        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
-                        console.log(compressedFile)
-                        formData.append("file", compressedFile);
+                        f = await imageCompression(file, options);
                     } catch (error) {
                         console.log(error);
+                        f = file;
                     }
 
-                    formData.append("upload_preset", "pacific-interlude");
-
-                    var imgUploadData = await fetch(
-                        "https://api.cloudinary.com/v1_1/dbs8wu1fx/image/upload",
-                        {
-                            method: "POST",
-                            body: formData,
-                        }
-                    );
-                    imgUploadData = await imgUploadData.json();
-
-                    if (imgUploadData?.error) {
-                        setError("pic_src", {
-                            type: "manual",
-                            message: imgUploadData?.error?.message,
-                        });
-                        setSubmitted(false);
-                        return;
-                    }
-
-                    data["img_src"] = imgUploadData.secure_url;
-                    data["public_id"] = imgUploadData.public_id;
                     data["album"] = props.album.id;
+                    data["img_src"] = await FirebaseClient.uploadFile(f, file.name);
+                    delete data["pic_src"];
 
-                    axios.defaults.headers.common["authorization"] =
-                        window.localStorage.getItem("token");
-                    const res = await axios.post(`/api/uploads/create`, data);
+                    const insert = await FirebaseClient.add("uploads", data);
 
                     if (props?.addPhoto) {
-                        props.addPhoto(res.data);
+                        props.addPhoto(data);
                     }
                     setFilesUploaded((filesUploaded) => filesUploaded + 1)
                 }
                 onClose();
             } else {
-                axios.defaults.headers.common["authorization"] =
-                    window.localStorage.getItem("token");
-                data['id'] = props.photo.id;
-                const res = await axios.post(`/api/uploads/update`, data);
+                await FirebaseClient.update("uploads", props.photo.id, data)
                 props.removePhoto(props.photo)
-                props.addPhoto(res.data)
-                console.log(res.data)
+                props.addPhoto(data)
                 onClose()
             }
         } catch (e) {
@@ -355,7 +368,7 @@ export const NewPhotoModal = (props) => {
                                 }`}
                             />
                         </div>
-                        <br />
+                        <br/>
                         <div className={`d-flex flex-column mb-3`}>
                             <label htmlFor="album" className={`form-label`}>
                                 Album*
