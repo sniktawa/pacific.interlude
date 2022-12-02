@@ -25,7 +25,7 @@ export default function About() {
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <NavComponent />
         <div className={`d-flex flex-column p-4 ${styles.about}`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
-          <p>pacific interlude123 focuses on developing your brand through thoughtful creative, digital, and visual strategies.</p>
+          <p>pacific interlude focuses on developing your brand through thoughtful creative, digital, and visual strategies.</p>
           <p>our goal is to execute the highest standard of quality in regards to design, creation, and execution.</p>
           <p>we monitor current trends and evaluate high-converting growth strategies to keep your business relevant and prosperous.</p>
           <p>we provide full-service production and post-production workflow.</p>
