@@ -236,8 +236,10 @@ export const NewPhotoModal = (props) => {
 
                     const insert = await FirebaseClient.add("uploads", data);
 
+
+
                     if (props?.addPhoto) {
-                        props.addPhoto(data);
+                        props.addPhoto(insert);
                     }
                     setFilesUploaded((filesUploaded) => filesUploaded + 1)
                 }

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import styles from "../styles/Dashboard.module.css";
+import React, {useState} from "react";
 import Swal from "sweetalert2";
-import axios from "axios";
-import { NewPhotoModal } from "./AlbumComponent";
+import {NewPhotoModal} from "./AlbumComponent";
 import {FirebaseClient} from "../firebase/FirebaseClient";
 
 export default function PhotoComponent({ photo, removePhoto, albums, addPhoto }) {
