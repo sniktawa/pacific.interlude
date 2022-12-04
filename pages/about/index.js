@@ -32,7 +32,6 @@ export default function About() {
           <p>With Pacific Interlude, brands can feel confident that they are taking the right steps towards success.</p>
           
           <br />
-          <br />
           <h5>services</h5>
           <p>
             <i className="fas fa-angle-right"></i> content creation<br />
