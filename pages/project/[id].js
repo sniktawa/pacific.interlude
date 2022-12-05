@@ -68,7 +68,7 @@ export default function Projects() {
     if (!albums && id) {
       fetchAlbums();
     }
-  }, [])
+  }, [albums, id])
 
   
   const renderDesktopImages = () => {
