@@ -98,7 +98,7 @@ export default function Projects() {
         arrows : false,
         pagination : false,
         drag: 'free',
-        snap: 'false',
+        snap: false,
         height: '100%',
       } }> 
       {
