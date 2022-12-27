@@ -22,7 +22,7 @@ export default function Projects() {
 
   useEffect(() => {
     if (typeof document != 'undefined') {
-      window.addEventListener('wheel', listenToScroll)
+      /*window.addEventListener('wheel', listenToScroll)*/
     }
   }, [])
 
