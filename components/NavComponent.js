@@ -10,7 +10,7 @@ export default function NavComponent() {
 
     return (
         <div className={`d-flex justify-content-between align-items-center ${styles.navBar}`}>
-            <div className={`d-flex align-items-end`} style={{ marginTop: '1.5rem' }}>
+            <div className={`d-flex align-items-end`} style={{ marginTop: '1.5rem; margin-bottom: 0.6rem;'' }}>
               <Link href="/" passHref><a className={'hide-mobile'}>PACIFIC INTERLUDE</a></Link>
               <Link href="/clientele" passHref><a className={`${router.pathname === '/clientele' ? 'active' : ''}`}>CLIENTELE</a></Link>
               <Link href="/about" passHref><a className={`${router.pathname === '/about' ? 'active' : ''}`}>ABOUT</a></Link>
