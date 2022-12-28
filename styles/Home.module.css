@@ -33,7 +33,7 @@
 
 .navBar a {
   margin-left: 1rem;
-  font-weight: bold;
+  /*font-weight: bold;*/
   font-size: clamp(12px, 2vw, 18px);
 }
 
