@@ -42,7 +42,8 @@ a {
 }
 
 a:hover {
-  color: white;
+  color: black;
+  font-weight: bold;
 }
 
 a::before {  
@@ -53,28 +54,33 @@ a::before {
 a:hover::before {
   transform: scaleX(1);
   transform-origin: bottom left;
+  font:bold;
+  color:#000
 }
 
 a::before {
   content: " ";
   display: block;
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  right: 0; bottom: 0; left: 0;
   inset: 0 0 0 0;
-  background: hsl(800 0% 20%);
+  background: hsl(800 0% 4%);
+  height:2px;
+  top:90%;
   z-index: -1;
   transition: transform .3s ease;
 }
 
 .active {
-  content: " ";
+  /*content: " ";
   display: block;
   top: 0; right: 0; bottom: 0; left: 0;
   inset: 0 0 0 0;
   background: hsl(800 0% 20%);
   z-index: -1;
-  transition: transform .3s ease;
-  color: white;
+  transition: transform .3s ease;*/
+  font-weight: bold;
+  color: black;
 }
 
 .bg-black {
