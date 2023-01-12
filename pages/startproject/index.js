@@ -137,78 +137,78 @@ function clickedMe(e) {
         {/*  <h6 className = "form-step"> steps: {count} of 4 </h6>*/}
     
     <form ref={form} onSubmit = { sendEmail } className={`text-center`}>
-    <div class="form-tile mx-auto">
+    <div className="form-tile mx-auto">
            <label> select how we can help </label>
         </div> 
-<fieldset class="startform select-group flex-flow mx-auto">
+<fieldset className="startform select-group flex-flow mx-auto">
     {/*<legend>You're interested in </legend>*/}
-    <label for="video-production" class="select-box bg-color-neu ">
+    <label for="video-production" className="select-box bg-color-neu ">
         <input type="checkbox" id="video-production" name="Inquiry" value="Video_Production" disabled={isSending}/>
-        <span class="select-tile flex-flow radius-8 ">
+        <span className="select-tile flex-flow radius-8 ">
         
             <span>video production</span>
         </span>
     </label>
 
-    <label for="web-design" class="select-box bg-color-neu ">
+    <label for="web-design" className="select-box bg-color-neu ">
         <input type="checkbox" id="web-design" name="Inquiry" value="Web_Design" disabled={isSending}/>
-        <span class="select-tile flex-flow radius-8 ">
+        <span className="select-tile flex-flow radius-8 ">
       
             <span>web design</span>
         </span>
     </label>
 
-    <label for="video-effects" class="select-box bg-color-neu ">
+    <label for="video-effects" className="select-box bg-color-neu ">
         <input type="checkbox" id="video-effects" name="Inquiry" value="Video_Effects" disabled={isSending}/>
-        <span class="select-tile flex-flow radius-8 ">
+        <span className="select-tile flex-flow radius-8 ">
          
             <span>video effects</span>
         </span>
     </label>
 
-    <label for="marketing-advertising" class="select-box bg-color-neu ">
+    <label for="marketing-advertising" className="select-box bg-color-neu ">
         <input type="checkbox" id="marketing-advertising" name="Inquiry" value="Marketing_Advertising" disabled={isSending}/>
-        <span class="select-tile flex-flow radius-8 ">
+        <span className="select-tile flex-flow radius-8 ">
       
             <span>marketing / advertising</span>
         </span>
     </label>
 
-    <label for="photo-production" class="select-box bg-color-neu ">
+    <label for="photo-production" className="select-box bg-color-neu ">
         <input type="checkbox" id="photo-production" name="Inquiry" value="Photo_Production" disabled={isSending}/>
-        <span class="select-tile flex-flow radius-8 ">
+        <span className="select-tile flex-flow radius-8 ">
          
             <span>photo production</span>
         </span>
     </label>
 
-    <label for="something-else" class="select-box bg-color-neu ">
+    <label for="something-else" className="select-box bg-color-neu ">
         <input type="checkbox" id="something-else" name="Inquiry" value="Something_else" disabled={isSending}/>
-        <span class="select-tile flex-flow radius-8 ">
+        <span className="select-tile flex-flow radius-8 ">
     
             <span>something else</span>
         </span>
     </label>
     
 </fieldset>
-<div class="input-tile grid-container padding-16">
-    {/*<div class="item-4">
+<div className="input-tile grid-container padding-16">
+    {/*<div className="item-4">
         <label> customer info </label>
   </div>*/}
-    <div class="grid-field item-2-mb">
+    <div className="grid-field item-2-mb">
         <label>First Name *</label>
         <input type="text" name="user_name" disabled={isSending} required/>
     </div>
-    <div class="grid-field item-2-mb">
+    <div className="grid-field item-2-mb">
         <label>Last Name</label>
         <input type="text" name="user_last" disabled={isSending}/>
     </div>
-    <div class="grid-field item-2">
+    <div className="grid-field item-2">
         <label>Email *</label>
         <input type="email" name="user_email" disabled={isSending} required/>
        
     </div>
-    <div class="grid-field item-2-mb">
+    <div className="grid-field item-2-mb">
         <label>Phone </label>
   
         <PhoneInput
@@ -216,11 +216,11 @@ function clickedMe(e) {
       value={form.phone}
       onChange={setValue} defaultCountry="US" name="user_phone" disabled={isSending}/>
     </div>
-    <div class="grid-field item-4">
+    <div className="grid-field item-4">
         <label>Company Website</label>
         <input type="text" name="user_website" disabled={isSending}/>
     </div>
-   {/* <div class="item-4">
+   {/* <div className="item-4">
 
         <label> project description </label>
     </div>
@@ -229,15 +229,15 @@ function clickedMe(e) {
   
 
 </div>
-<div class="form-tile mx-auto">
+<div className="form-tile mx-auto">
            <label> select your budget </label>
         </div>
-<fieldset class="startform click-group flex-flow mx-auto">
+<fieldset className="startform click-group flex-flow mx-auto">
     {/*<legend>You're interested in </legend>*/}
     
-    <label for="budg-1" class="select-box bg-color-neu ">
+    <label for="budg-1" className="select-box bg-color-neu ">
         <input type="radio" id="budg-1" name="Budget" value="$5,000 - $10,000"/>
-        <span class="click-tile flex-flow radius-8 ">
+        <span className="click-tile flex-flow radius-8 ">
      
             <span>$5,000 - $10,000</span>
         </span>
@@ -246,9 +246,9 @@ function clickedMe(e) {
         </button>
     </label>
 
-    <label for="budg-2" class="select-box bg-color-neu ">
+    <label for="budg-2" className="select-box bg-color-neu ">
         <input type="radio" id="budg-2" name="Budget" value="$10,000 - $25,000"/>
-        <span class="click-tile flex-flow radius-8 ">
+        <span className="click-tile flex-flow radius-8 ">
         
             <span>$10,000 - $25,000</span>
         </span>
@@ -257,9 +257,9 @@ function clickedMe(e) {
         </button>
     </label>
 
-    <label for="budg-3" class="select-box bg-color-neu ">
+    <label for="budg-3" className="select-box bg-color-neu ">
         <input type="radio" id="budg-3" name="Budget" value="$25,000 - $50,000"/>
-        <span class="click-tile flex-flow radius-8 ">
+        <span className="click-tile flex-flow radius-8 ">
      
             <span>$25,000 - $50,000</span>
         </span>
@@ -269,9 +269,9 @@ function clickedMe(e) {
         
     </label>
 
-    <label for="budg-4" class="select-box bg-color-neu ">
+    <label for="budg-4" className="select-box bg-color-neu ">
         <input type="radio" id="budg-4" name="Budget" value="$50,000 - $100,000"/>
-        <span class="click-tile flex-flow radius-8 ">
+        <span className="click-tile flex-flow radius-8 ">
        
             <span>$50,000 - $100,000</span>
         </span>
@@ -282,7 +282,7 @@ function clickedMe(e) {
 
 </fieldset>
 
-<div class="input-tile grid-container padding-16">
+<div className="input-tile grid-container padding-16">
 
     <div>
         <label>briefly describe your project</label>
