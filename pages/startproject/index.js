@@ -282,7 +282,7 @@ function clickedMe(e) {
 
 </fieldset>
 
-<div className="input-tile grid-container padding-16">
+<div className="input-tile grid-container text-container padding-16">
 
     <div>
         <label>briefly describe your project</label>
