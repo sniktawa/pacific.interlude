@@ -381,6 +381,11 @@ input:focus ~ .select-tile {
         padding: 0 1.5em;
         border: 2px solid #6b767e;
     }
+      .ReactModal__Content{
+      inset: 70% auto auto 50%!important;
+      }.ReactModal__Content--after-open{
+          inset: 70% auto auto 50%!important;
+      }
   }
 
   .text-modal{
