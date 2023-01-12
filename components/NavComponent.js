@@ -15,6 +15,7 @@ export default function NavComponent() {
               <Link href="/clientele" passHref><a className={`${router.pathname === '/clientele' ? 'active' : ''}`}>CLIENTELE</a></Link>
               <Link href="/about" passHref><a className={`${router.pathname === '/about' ? 'active' : ''}`}>ABOUT</a></Link>
               <Link href="/contact" passHref><a className={`${router.pathname === '/contact' ? 'active' : ''}`}>CONTACT</a></Link>
+               <Link href="/startproject" passHref><a className={`${router.pathname === '/startproject' ? 'active' : ''}`}>START PROJECT</a></Link>
             </div>
             <div className={`d-flex align-items-center h-100 ${styles.icon}`}>
               <img src="/images/LogoBlack.png" alt="Logo" width={32} height={32} onClick={() => router.push('/')} style={{ cursor: 'pointer' }} />
