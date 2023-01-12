@@ -360,6 +360,27 @@ input:focus ~ .select-tile {
         grid-column-start: 1;
         grid-column-end: 4;
     }
+         .click-tile {
+        min-width: 16.7rem;
+    }
+    .text-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 0px;
+        grid-gap: 0;
+        gap: 0;
+        align-content: space-around;
+        justify-content: center;
+    }
+    .input-tile textarea {
+        width: 80vw;
+        background-position: 100%;
+        background-size: 1.5em;
+        background-repeat: no-repeat;
+        border-radius: 0.4em;
+        padding: 0 1.5em;
+        border: 2px solid #6b767e;
+    }
   }
 
   .text-modal{
