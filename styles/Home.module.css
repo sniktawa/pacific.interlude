@@ -72,6 +72,16 @@
   /* .body {
     height: calc(100% - 6rem) !important;
   } */
+  .icon {
+    position: absolute!important;
+    margin-bottom: 1.5rem!important;
+    right: 2rem!important;
+  }
+  .icon img{
+    width: 20px!important;
+    aspect-ratio: auto 20 / 20!important;
+    height: 20px!important;
+  }
 }
 
 .about h5 {
