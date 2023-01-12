@@ -158,11 +158,11 @@ function clickedMe(e) {
         </span>
     </label>
 
-    <label for="video-effects" className="select-box bg-color-neu ">
-        <input type="checkbox" id="video-effects" name="Inquiry" value="Video_Effects" disabled={isSending}/>
+    <label for="social-media-management" className="select-box bg-color-neu ">
+        <input type="checkbox" id="social-media-management" name="Inquiry" value="Social_Media_Management" disabled={isSending}/>
         <span className="select-tile flex-flow radius-8 ">
          
-            <span>video effects</span>
+            <span>social media management</span>
         </span>
     </label>
 
