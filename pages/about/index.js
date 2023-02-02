@@ -25,11 +25,9 @@ export default function About() {
       <div className={`d-flex w-100 h-100 flex-column ${styles.body}`}>
         <NavComponent />
         <div className={`d-flex flex-column p-4 ${styles.about}`} style={{ maxHeight: 'calc(100% - 3rem)' }}>
-          <p>Pacific Interlude is a creative agency dedicated to helping brands achieve success by crafting creative solutions tailored to the needs of our clients.</p>
-          <p>We offer a wide range of services including brand strategy, photoshoot production, and digital marketing, ensuring that our clients are able to reach their desired goals.</p>
-          <p>Pacific Interlude has a proven track record of success, working with some of the biggest brands in the industry.</p>
-          <p>Our team of experienced professionals have the expertise and knowledge needed to help brands create campaigns that stand out, engage their audience, and drive conversions.</p>
-          <p>With Pacific Interlude, brands can feel confident that they are taking the right steps towards success.</p>
+          <p>For 6 years, Pacific Interlude has been leading the way in brand transformation.</p>
+          <p>With a blend of creative and strategic vision, we have been turning brands into iconic benchmarks that both define and transcend their time.</p>
+          <p>Our expertise in brand work, book design, photography, film, and editorial, allows us to continuously challenge the status quo and bring a fresh and fearless approach to every project.</p>
           
           <br />
           <h5>services</h5>
