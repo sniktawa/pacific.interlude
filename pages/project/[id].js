@@ -59,13 +59,20 @@ export default function Projects() {
                 setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
               }
             }
-          } else if (upload.video_src && !isMobile) {
+          } else if (upload.video_src) {
             let url = upload.video_src;
-            const video = document.createElement('video');
-            video.src = url;
-            video.onloadeddata = () => {
+            if (isMobile) {
+              // Immediately consider the video as 'loaded' on mobile
               if (!loadedUrls.includes(url)) {
-                setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+                setLoadedUrls((loadedUrls) => [...loadedUrls, url])
+              }
+            } else {
+              const video = document.createElement('video');
+              video.src = url;
+              video.onloadeddata = () => {
+                if (!loadedUrls.includes(url)) {
+                  setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+                }
               }
             }
           }
