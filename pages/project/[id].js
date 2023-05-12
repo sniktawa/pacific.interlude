@@ -50,15 +50,27 @@ export default function Projects() {
         let a = res.data.filter((album) => album.uploads.length > 0 && album.id ==id)[0];
         setAlbum(a)
         a.uploads.forEach((upload) => {
-          let url = upload.img_src;
-          const img = new Image();
-          img.src = url;
-          img.onload = () => {
-            if (!loadedUrls.includes(url)) {
-              setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+          if (upload.img_src) {
+            let url = upload.img_src;
+            const img = new Image();
+            img.src = url;
+            img.onload = () => {
+              if (!loadedUrls.includes(url)) {
+                setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+              }
+            }
+          } else if (upload.video_src) {
+            let url = upload.video_src;
+            const video = document.createElement('video');
+            video.src = url;
+            video.onloadeddata = () => {
+              if (!loadedUrls.includes(url)) {
+                setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+              }
             }
           }
         });
+
     } catch (e) {
         console.error(e)
     }
@@ -81,12 +93,22 @@ export default function Projects() {
         height: '100%',
       } }> 
       {
-      album.uploads.map((upload, index) => {
-          return (
-          <SplideSlide key={index}>
-            <img src={upload.img_src} alt={upload?.title || upload.img_src} />
-          </SplideSlide>
-        )})
+        album.uploads.map((upload, index) => {
+          if (upload.video_src) {
+            return (
+              <SplideSlide key={index}>
+                <video src={upload.video_src} controls muted autoPlay style={{ width: 'auto', height: '97%' }} className={`p-4 pb-2`} />
+              </SplideSlide>
+            )
+          } else if (upload.img_src) {
+            return (
+              <SplideSlide key={index}>
+                <img src={upload.img_src} alt={upload?.title || upload.img_src} />
+              </SplideSlide>
+            )
+          }
+          return null;
+        })
       }
     </Splide>
     )
@@ -94,11 +116,21 @@ export default function Projects() {
 
   const renderMobileImages = () => {
     return album.uploads.map((upload, index) => {
-          return (
+      if (upload.video_src) {
+        return (
+          <div className={`d-flex w-100 p-2`} key={index}>
+            <video src={upload.video_src} controls muted autoPlay style={{ width: '100%', height: 'auto' }} />
+          </div>
+        )
+      } else if (upload.img_src) {
+        return (
           <div className={`d-flex w-100 p-2`} key={index}>
             <img src={upload.img_src} alt={upload?.title || upload.img_src} style={{ width: '100%', height: 'auto' }} />
           </div>
-        )})
+        )
+      }
+      return null;
+    })
   }
 
   if (!albums || !album) return <></>

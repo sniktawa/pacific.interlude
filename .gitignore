@@ -34,3 +34,10 @@ yarn-error.log*
 .vercel
 
 .env
+
+# files
+firebase/publicFirebaseConfig.json
+firebase/serviceAccountKey.json
+firebase/FirebaseAdmin.js
+firebase/FirebaseClient.js
+package-lock.json

@@ -94,3 +94,24 @@
   font-size: clamp(12px, 2vw, 24px);
   font-weight: bold;
 }
+
+.video-container {
+  position: relative;
+}
+
+.video-container video {
+  width: 100%;
+}
+
+.video-container .controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.video-container:hover .controls {
+  display: block;
+}

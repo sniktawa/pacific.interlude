@@ -1,11 +1,29 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Swal from "sweetalert2";
 import {NewPhotoModal} from "./AlbumComponent";
 import {FirebaseClient} from "../firebase/FirebaseClient";
 
+
 export default function PhotoComponent({ photo, removePhoto, albums, addPhoto }) {
 
     const [uploadModalOpen, setUploadModalOpen] = useState(false);
+
+
+    var media_src = null;
+
+    const [isVideo, setIsVideo] = useState(false);
+    const [mediaSrc, setMediaSrc] = useState(null);
+
+    useEffect(() => {
+        if(photo.video_src){
+            setMediaSrc(photo.video_src);
+            setIsVideo(true);
+        } else {
+            setMediaSrc(photo.img_src);
+            setIsVideo(false);
+        }
+    }, [photo]);
+   
 
   const deletePhoto = async () => {
     Swal.fire({
@@ -57,7 +75,12 @@ export default function PhotoComponent({ photo, removePhoto, albums, addPhoto })
       >
         <i className="fa fa-bars" />
       </button>
-      <img src={photo.img_src} loading="lazy" />
+  
+      {isVideo ? (
+          <video src={mediaSrc} controls loading="lazy" style={{ width: 'auto', height: '100%' }}/>
+      ) : (
+          <img src={mediaSrc} loading="lazy" />
+      )}
     </div>
     <NewPhotoModal isOpen={uploadModalOpen} setOpen={setUploadModalOpen} photo={photo} albums={albums} removePhoto={removePhoto} addPhoto={addPhoto} />
     </>

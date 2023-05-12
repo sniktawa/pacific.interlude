@@ -127,13 +127,13 @@ export default function AlbumComponent({album, albums, setAlbums}) {
                         className={`btn-black`}
                         onClick={() => setUploadModalOpen(true)}
                     >
-                        Upload Photo
+                        Upload
                     </button>
                 </div>
                 <div
                     className={`d-flex`}
                     style={{
-                        overflowX: album?.uploads && album.uploads.length < 1 ? "hidden" : "scroll",
+                        overflowX: album?.uploads && album.uploads.length < 1 ? "scroll" : "scroll",
                         overflowY: "hidden"
                     }}
                 >
@@ -182,7 +182,13 @@ export const NewPhotoModal = (props) => {
     }, []);
 
     const handlePicChange = (e) => {
-        setFilesLength(e.target.files.length)
+        const file = e.target.files[0];
+        //setFilesLength(e.target.files.length)
+        if (file && (file.type.startsWith('image/') || file.type.startsWith('video/'))) {
+            setFilesLength(e.target.files.length)
+        } else {
+            console.error('Invalid file type');
+        }
     }
 
     const customStyles = {
@@ -203,45 +209,54 @@ export const NewPhotoModal = (props) => {
         setSubmitted(false);
         reset();
     };
-
     const onSubmit = async (data) => {
         setSubmitted(true);
-
+        console.log(data);
         try {
             if (!props?.photo) {
                 const form = formRef.current;
                 const fileInput = Array.from(form.elements).find(
                     ({name}) => name === "pic_src"
                 );
-
+    
                 for (const file of fileInput.files) {
-                    const options = {
-                        maxSizeMB: 5,
-                        maxWidthOrHeight: 1920,
-                        useWebWorker: true
+                    if (file.type.startsWith('image/')) {
+                        const options = {
+                            maxSizeMB: 5,
+                            maxWidthOrHeight: 1920,
+                            useWebWorker: true
+                        }
+    
+                        let f = file;
+    
+                        try {
+                            f = await imageCompression(file, options);
+                        } catch (error) {
+                            console.log(error);
+                            f = file;
+                        }
+    
+                        data["album"] = props.album.id;
+                        data["img_src"] = await FirebaseClient.uploadFile(f, file.name);
+                        delete data["pic_src"];
+    
+                        const insert = await FirebaseClient.add("uploads", data);
+    
+                        if (props?.addPhoto) {
+                            props.addPhoto(insert);
+                        }
+                        setFilesUploaded((filesUploaded) => filesUploaded + 1)
+                    } else if (file.type.startsWith('video/')) {
+                        // Video upload code...
+                        data["album"] = props.album.id;
+                        data["video_src"] = await FirebaseClient.uploadFile(file, file.name);
+                        delete data["pic_src"];
+                        const insert = await FirebaseClient.add("uploads", data);
+                        if (props?.addPhoto) {
+                            props.addPhoto(insert);
+                        }
+                        setFilesUploaded((filesUploaded) => filesUploaded + 1)
                     }
-
-                    let f = file;
-
-                    try {
-                        f = await imageCompression(file, options);
-                    } catch (error) {
-                        console.log(error);
-                        f = file;
-                    }
-
-                    data["album"] = props.album.id;
-                    data["img_src"] = await FirebaseClient.uploadFile(f, file.name);
-                    delete data["pic_src"];
-
-                    const insert = await FirebaseClient.add("uploads", data);
-
-
-
-                    if (props?.addPhoto) {
-                        props.addPhoto(insert);
-                    }
-                    setFilesUploaded((filesUploaded) => filesUploaded + 1)
                 }
                 onClose();
             } else {
@@ -320,14 +335,14 @@ export const NewPhotoModal = (props) => {
                     <div className={`d-flex flex-column mb-3`}>
                         <div className={`d-flex flex-column`}>
                             <label htmlFor="pic_src" className={`form-label`}>
-                                Image*
+                                Image or Video*
                             </label>
                             <input
                                 {...register("pic_src", {required: false})}
                                 id="pic_src"
                                 type="file"
                                 multiple={true}
-                                accept="image/*"
+                                accept="image/*,video/*"
                                 placeholder="https://imgur.com/4a4x8a"
                                 className={`form-control ${
                                     errors?.pic_src ? "is-invalid" : ""
