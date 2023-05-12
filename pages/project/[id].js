@@ -64,21 +64,36 @@ export default function Projects() {
             };
             img.onerror = reject;
           } else if (upload.video_src) {
-              let url = upload.video_src;
-              const video = document.createElement('video');
-              video.src = url;
-              if(!isMobile){
-                video.onloadeddata = () => {
-                  setLoadedCount(prevCount => prevCount + 1);
-                  resolve(url);
-                };
-              }else{
+            let url = upload.video_src;
+            const video = document.createElement('video');
+            video.src = url;
+          
+            const loadPromise = new Promise((resolve, reject) => {
+              video.addEventListener('loadeddata', () => {
                 setLoadedCount(prevCount => prevCount + 1);
                 resolve(url);
-              }
-              video.onerror = reject;
-         
-          } else {
+              });
+          
+              video.addEventListener('error', () => {
+                setLoadedCount(prevCount => prevCount + 1);
+                resolve(null);
+              });
+            });
+          
+            if (isMobile) {
+              setLoadedCount(prevCount => prevCount + 1);
+              resolve(null);
+            }
+          
+            video.load();
+            video.onerror = () => {
+              setLoadedCount(prevCount => prevCount + 1);
+              resolve(null);
+            };
+          
+            return loadPromise;
+          }  
+           else {
             setLoadedCount(prevCount => prevCount + 1);
             resolve(null);
           }
