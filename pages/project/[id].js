@@ -43,45 +43,54 @@ export default function Projects() {
     }
   }
 
+  const [loadedCount, setLoadedCount] = useState(0);
+
   const fetchAlbums = async () => {
     try {
-        const res = await axios.get("/api/albums/fetch");
-        setAlbums(res.data);
-        let a = res.data.filter((album) => album.uploads.length > 0 && album.id ==id)[0];
-        setAlbum(a)
-        a.uploads.forEach((upload) => {
+      const res = await axios.get("/api/albums/fetch");
+      setAlbums(res.data);
+      let a = res.data.filter((album) => album.uploads.length > 0 && album.id == id)[0];
+      setAlbum(a);
+
+      const loadEvents = a.uploads.map((upload) => {
+        return new Promise((resolve, reject) => {
           if (upload.img_src) {
             let url = upload.img_src;
             const img = new Image();
             img.src = url;
             img.onload = () => {
-              if (!loadedUrls.includes(url)) {
-                setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
-              }
-            }
-          } else if (upload.video_src) {
+              setLoadedCount(prevCount => prevCount + 1);
+              resolve(url);
+            };
+            img.onerror = reject;
+          } else if (upload.video_src && !isMobile) {
             let url = upload.video_src;
-            if (isMobile) {
-              // Immediately consider the video as 'loaded' on mobile
-              if (!loadedUrls.includes(url)) {
-                setLoadedUrls((loadedUrls) => [...loadedUrls, url])
-              }
-            } else {
-              const video = document.createElement('video');
-              video.src = url;
-              video.onloadeddata = () => {
-                if (!loadedUrls.includes(url)) {
-                  setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
-                }
-              }
-            }
+            const video = document.createElement('video');
+            video.src = url;
+            video.onloadeddata = () => {
+              setLoadedCount(prevCount => prevCount + 1);
+              resolve(url);
+            };
+            video.onerror = reject;
+          } else {
+            setLoadedCount(prevCount => prevCount + 1);
+            resolve(null);
           }
         });
+      });
+
+      Promise.all(loadEvents)
+        .then((urls) => {
+          // Filter out any null values (from skipped video loads on mobile)
+          const validUrls = urls.filter((url) => url !== null);
+          setLoadedUrls(validUrls);
+        })
+        .catch((e) => console.error(e));
 
     } catch (e) {
-        console.error(e)
+      console.error(e);
     }
-}
+  };
 
   useEffect(() => {
     if (!albums && id) {
@@ -143,7 +152,7 @@ export default function Projects() {
   if (!albums || !album) return <></>
 
   const renderProgressBar = () => {
-    const progress = Math.round(((loadedUrls.length / album.uploads.length) * 100) / 10);
+    const progress = Math.round(((loadedCount / album.uploads.length) * 100) / 10);
     const blocks = []
 
     for (var i = 0; i < progress; i++) {
@@ -151,7 +160,7 @@ export default function Projects() {
     }
 
     return (
-      <div className={`loadingScreen justify-content-center align-items-center ${loadedUrls.length == album.uploads.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
+      <div className={`loadingScreen justify-content-center align-items-center ${loadedCount == album.uploads.length ? "loadingScreenFinish" : ""}`} onAnimationEnd={() => setLoaded(true)}>
         <div className={`d-flex w-100 flex-column text-center`}>
           <h3 style={{ color: 'rgb(25, 25, 110)', letterSpacing: '-2px' }}>Progress Is Impossible Without Change</h3>
           <div className={`d-flex ${styles.progressBar}`}>
