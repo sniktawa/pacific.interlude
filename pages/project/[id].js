@@ -63,15 +63,21 @@ export default function Projects() {
               resolve(url);
             };
             img.onerror = reject;
-          } else if (upload.video_src && !isMobile) {
-            let url = upload.video_src;
-            const video = document.createElement('video');
-            video.src = url;
-            video.onloadeddata = () => {
-              setLoadedCount(prevCount => prevCount + 1);
-              resolve(url);
-            };
-            video.onerror = reject;
+          } else if (upload.video_src) {
+              let url = upload.video_src;
+              const video = document.createElement('video');
+              video.src = url;
+              if(!isMobile){
+                video.onloadeddata = () => {
+                  setLoadedCount(prevCount => prevCount + 1);
+                  resolve(url);
+                };
+              }else{
+                setLoadedCount(prevCount => prevCount + 1);
+                resolve(url);
+              }
+              video.onerror = reject;
+         
           } else {
             setLoadedCount(prevCount => prevCount + 1);
             resolve(null);
