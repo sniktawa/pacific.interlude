@@ -133,7 +133,7 @@ export default function AlbumComponent({album, albums, setAlbums}) {
                 <div
                     className={`d-flex`}
                     style={{
-                        overflowX: album?.uploads && album.uploads.length < 1 ? "scroll" : "scroll",
+                        overflowX: album?.uploads && album.uploads.length < 1 ? "hidden" : "scroll",
                         overflowY: "hidden"
                     }}
                 >
