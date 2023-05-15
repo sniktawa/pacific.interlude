@@ -156,7 +156,7 @@ export default function Projects() {
       if (upload.video_src) {
         return (
           <div className={`d-flex w-100 p-2`} key={index}>
-            <video src={upload.video_src} controls style={{ width: '100%', height: 'auto' }} />
+            <video src={upload.video_src} controls playsInline style={{ width: '100%', height: 'auto' }} />
           </div>
         )
       } else if (upload.img_src) {
