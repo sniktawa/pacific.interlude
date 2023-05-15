@@ -117,10 +117,14 @@ export default function Home() {
                   loop
                   muted
                   autoPlay
+                  playsInline
                   style={{ width: 'auto', height: '97%' }}
                   className={`p-4 pb-2`}
                   onLoadedMetadata={(e) => {
                     e.target.play();
+                  }}
+                  onError={(e) => {
+                    console.error('Video error:', e);
                   }}
                 />
               </SplideSlide>
@@ -143,10 +147,17 @@ export default function Home() {
       if (upload.video_src) {
         return (
           <div className={`d-flex w-100 p-2`} key={index}>
-            <video src={upload.video_src} muted loop playsInline style={{ width: '100%', height: 'auto' }} 
+            <video src={upload.video_src} muted 
+            loop 
+            playsInline 
+            autoPlay 
+            style={{ width: '100%', height: 'auto' }} 
             onLoadedMetadata={(e) => {
               e.target.play();
-            }} />
+            }} 
+            onError={(e) => {
+              console.error('Video error:', e);
+            }}/>
           </div>
         );
       } else if (upload.img_src) {

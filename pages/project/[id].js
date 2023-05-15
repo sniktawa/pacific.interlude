@@ -134,7 +134,15 @@ export default function Projects() {
           if (upload.video_src) {
             return (
               <SplideSlide key={index}>
-                <video src={upload.video_src} controls muted autoPlay style={{ width: 'auto', height: '97%' }} className={`p-4 pb-2`} />
+                <video src={upload.video_src} 
+                controls 
+                muted 
+                autoPlay 
+                playsInline 
+                onError={(e) => {
+                  console.error('Video error:', e);
+                }}
+                style={{ width: 'auto', height: '97%' }} className={`p-4 pb-2`} />
               </SplideSlide>
             )
           } else if (upload.img_src) {
@@ -156,7 +164,18 @@ export default function Projects() {
       if (upload.video_src) {
         return (
           <div className={`d-flex w-100 p-2`} key={index}>
-            <video src={upload.video_src} controls playsInline style={{ width: '100%', height: 'auto' }} />
+            <video src={upload.video_src} 
+            controls 
+            autoPlay
+            playsInline 
+            muted 
+            onLoadedMetadata={(e) => {
+              e.target.play();
+            }}
+            onError={(e) => {
+              console.error('Video error:', e);
+            }}
+            style={{ width: '100%', height: 'auto' }} />
           </div>
         )
       } else if (upload.img_src) {
