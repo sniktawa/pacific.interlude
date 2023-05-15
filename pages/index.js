@@ -41,23 +41,62 @@ export default function Home() {
 
   const fetchAlbums = async () => {
     try {
-        const res = await axios.get("/api/albums/fetch");
-        setAlbums(res.data);
-
-        res.data[0].uploads.forEach((upload) => {
-          let url = upload.img_src;
-          const img = new Image();
-          img.src = url;
-          img.onload = () => {
-            if (!loadedUrls.includes(url)) {
-              setLoadedUrls((loadedUrls) => [...loadedUrls.filter(x => x !== url), url])
+      const res = await axios.get('/api/albums/fetch');
+      setAlbums(res.data);
+      const uploads = res.data[0]?.uploads || [];
+      const loadPromises = uploads.map((upload) => {
+        return new Promise((resolve) => {
+          if (upload.img_src) {
+            const img = new Image();
+            img.src = upload.img_src;
+            img.onload = () => {
+              if (!loadedUrls.includes(upload.img_src)) {
+                setLoadedUrls((prevUrls) => [...prevUrls, upload.img_src]);
+              }
+              resolve();
+            };
+          } else if (upload.video_src) {
+            const video = document.createElement('video');
+            video.src = upload.video_src;
+  
+            const loadPromise = new Promise((resolve) => {
+              video.addEventListener('loadeddata', () => {
+                if (!loadedUrls.includes(upload.video_src)) {
+                  setLoadedUrls((prevUrls) => [...prevUrls, upload.video_src]);
+                }
+                resolve();
+              });
+  
+              video.addEventListener('error', () => {
+                resolve();
+              });
+            });
+  
+            if (isMobile) {
+              setLoadedCount((prevCount) => prevCount + 1);
+              resolve();
             }
+  
+            video.load();
+            video.onerror = () => {
+              setLoadedCount((prevCount) => prevCount + 1);
+              resolve();
+            };
+  
+            return loadPromise;
+          } else {
+            resolve();
           }
         });
+      });
+  
+      Promise.all(loadPromises).then(() => {
+        setLoaded(true);
+      });
     } catch (e) {
-        console.error(e)
+      console.error(e);
     }
-}
+  };
 
   useEffect(() => {
     if (!albums) {
@@ -67,33 +106,58 @@ export default function Home() {
 
   const renderDesktopImages = () => {
     return (
-      <Splide className={`h-100 w-100 ${styles.sliderWide}`} options={ {
-        gap   : '-40px',
-        arrows : false,
-        pagination : false,
+      <Splide className={`h-100 w-100 ${styles.sliderWide}`} options={{
+        gap: '-40px',
+        arrows: false,
+        pagination: false,
         drag: 'free',
         height: '100%',
-      } }> 
-      {
-      albums[0].uploads.map((upload, index) => {
-          return (
-          <SplideSlide key={index}>
-            <img src={upload.img_src} alt={upload?.title || upload.img_src} />
-          </SplideSlide>
-        )})
-      }
-    </Splide>
-    )
-  }
-
+      }}>
+        {albums[0].uploads.map((upload, index) => {
+          if (upload.video_src) {
+            return (
+              <SplideSlide key={index}>
+                <video
+                  src={upload.video_src}
+                  loop
+                  muted
+                  autoPlay
+                  style={{ width: 'auto', height: '97%' }}
+                  className={`p-4 pb-2`}
+                />
+              </SplideSlide>
+            );
+          } else if (upload.img_src) {
+            return (
+              <SplideSlide key={index}>
+                <img src={upload.img_src} alt={upload?.title || upload.img_src} />
+              </SplideSlide>
+            );
+          }
+          return null;
+        })}
+      </Splide>
+    );
+  };
+  
   const renderMobileImages = () => {
     return albums[0].uploads.map((upload, index) => {
-          return (
+      if (upload.video_src) {
+        return (
+          <div className={`d-flex w-100 p-2`} key={index}>
+            <video src={upload.video_src} muted loop style={{ width: '100%', height: 'auto' }} />
+          </div>
+        );
+      } else if (upload.img_src) {
+        return (
           <div className={`d-flex w-100 p-2`} key={index}>
             <img src={upload.img_src} alt={upload?.title || upload.img_src} style={{ width: '100%', height: 'auto' }} />
           </div>
-        )})
-  }
+        );
+      }
+      return null;
+    });
+  };
 
   const renderProgressBar = () => {
     const progress = Math.round(((loadedUrls.length / albums[0].uploads.length) * 100) / 10);
