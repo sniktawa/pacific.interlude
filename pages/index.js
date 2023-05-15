@@ -143,7 +143,7 @@ export default function Home() {
       if (upload.video_src) {
         return (
           <div className={`d-flex w-100 p-2`} key={index}>
-            <video src={upload.video_src} muted loop style={{ width: '100%', height: 'auto' }} 
+            <video src={upload.video_src} muted loop autoPlay style={{ width: '100%', height: 'auto' }} 
             onLoadedMetadata={(e) => {
               e.target.play();
             }} />
