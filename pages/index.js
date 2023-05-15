@@ -59,7 +59,7 @@ export default function Home() {
             const video = document.createElement('video');
             video.src = upload.video_src;
   
-            const loadPromise = new Promise((resolve) => {
+            const loadPromise = new Promise((resolve, reject) => {
               video.addEventListener('loadeddata', () => {
                 if (!loadedUrls.includes(upload.video_src)) {
                   setLoadedUrls((prevUrls) => [...prevUrls, upload.video_src]);
@@ -73,15 +73,10 @@ export default function Home() {
             });
   
             if (isMobile) {
-              setLoadedCount((prevCount) => prevCount + 1);
               resolve();
             }
   
             video.load();
-            video.onerror = () => {
-              setLoadedCount((prevCount) => prevCount + 1);
-              resolve();
-            };
   
             return loadPromise;
           } else {
@@ -124,6 +119,9 @@ export default function Home() {
                   autoPlay
                   style={{ width: 'auto', height: '97%' }}
                   className={`p-4 pb-2`}
+                  onLoadedMetadata={(e) => {
+                    e.target.play();
+                  }}
                 />
               </SplideSlide>
             );
@@ -145,7 +143,10 @@ export default function Home() {
       if (upload.video_src) {
         return (
           <div className={`d-flex w-100 p-2`} key={index}>
-            <video src={upload.video_src} muted loop style={{ width: '100%', height: 'auto' }} />
+            <video src={upload.video_src} muted loop style={{ width: '100%', height: 'auto' }} 
+            onLoadedMetadata={(e) => {
+              e.target.play();
+            }} />
           </div>
         );
       } else if (upload.img_src) {
