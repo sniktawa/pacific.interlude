@@ -14,7 +14,6 @@ export default function NavComponent() {
               <Link href="/" passHref><a className={'hide-mobile'}>PACIFIC INTERLUDE</a></Link>
               <Link href="/clientele" passHref><a className={`${router.pathname === '/clientele' ? 'active' : ''}`}>CLIENTELE</a></Link>
               <Link href="/about" passHref><a className={`${router.pathname === '/about' ? 'active' : ''}`}>ABOUT</a></Link>
-              <Link href="/contact" passHref><a className={`${router.pathname === '/contact' ? 'active' : ''}`}>CONTACT</a></Link>
                <Link href="/startproject" passHref><a className={`${router.pathname === '/startproject' ? 'active' : ''}`}>START PROJECT</a></Link>
             </div>
             <div className={`d-flex align-items-center h-100 ${styles.icon}`}>
