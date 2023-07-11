@@ -38,10 +38,17 @@ export default function About() {
             <i className="fas fa-angle-right"></i> digital strategy<br />
             <i className="fas fa-angle-right"></i> pr
           </p>
+
+          <h5>contact us</h5>
+          <div className={`d-flex align-items-center`}>
+            <p><a href="mailto:work@pacificinterlude.com">work@pacificinterlude.com</a></p>
+          </div>
+          <h5>socials</h5>
+          <div className={`d-flex align-items-center`}>
+            <p><a href="https://www.instagram.com/pacificinterlude">@pacificinterlude</a></p>
+          </div>
         </div>
       </div>
-
-     
     </div>
     </>
   )
