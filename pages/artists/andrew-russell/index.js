@@ -133,7 +133,7 @@ export default function Talent() {
                         <div className="biography-text"><a ref={emailLinkRef} className="email-link" href="#">zoe@<span></span>pacificinterlude<span>.</span>com</a></div>
 
                         <div className="biography-title">INSTAGRAM</div>
-                        <div className="biography-text"><a href="https://instagram.com/andrewrossrussell" target="_blank">@ANDREWJRUSSELL</a></div>
+                        <div className="biography-text"><a href="https://instagram.com/andrewrossrussell" target="_blank">@ANDREWROSSRUSSELL</a></div>
                       </div>
 
                     </div>
