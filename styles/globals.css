@@ -1,64 +1,16 @@
 @font-face {
-  font-family: 'FuturaTSNew';
-  src: url('/fonts/FuturaTSNew.ttf') format('truetype');
-  font-weight: normal;
+  font-family: "MorrisSansW01-LightCond";
+  src: url("/fonts/morris.ttf");
   font-style: normal;
-  font-display:swap;
-}
-
-/* FuturaTSNewBold */
-@font-face {
-  font-family: 'FuturaTSNewBold';
-  src: url('/fonts/FuturaTSNewBold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-
-/* FuturaTSNewExtraBold */
-@font-face {
-  font-family: 'FuturaTSNewExtraBold';
-  src: url('/fonts/FuturaTSNewExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-}
-
-/* FuturaTSNewExtraLight */
-@font-face {
-  font-family: 'FuturaTSNewExtraLight';
-  src: url('/fonts/FuturaTSNewExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
-}
-
-/* FuturaTSNewHeavy */
-@font-face {
-  font-family: 'FuturaTSNewHeavy';
-  src: url('/fonts/FuturaTSNewHeavy.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-}
-
-/* FuturaTSNewLight */
-@font-face {
-  font-family: 'FuturaTSNewLight';
-  src: url('/fonts/FuturaTSNewLight.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-/* FuturaTSNewMedium */
-@font-face {
-  font-family: 'FuturaTSNewMedium';
-  src: url('/fonts/FuturaTSNewMedium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: FuturaTSNew, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: MorrisSansW01-LightCond, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: #f7f3ea;
   min-width: 100vw;

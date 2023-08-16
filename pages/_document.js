@@ -14,7 +14,6 @@ class MyDocument extends Document {
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" />
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-            
             <script async src="https://kit.fontawesome.com/b3d77aa7d2.js" crossOrigin="anonymous"></script>
             {/*<script async src="https://cdnjs.cloudflare.com/ajax/libs/react-modal/3.14.3/react-modal.min.js" integrity="sha512-MY2jfK3DBnVzdS2V8MXo5lRtr0mNRroUI9hoLVv2/yL3vrJTam3VzASuKQ96fLEpyYIT4a8o7YgtUs5lPjiLVQ==" crossOrigin="anonymous" referrerPolicy="no-referrer"></script>*/}
             <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

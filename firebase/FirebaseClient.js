@@ -1,8 +1,6 @@
 import {initializeApp} from 'firebase/app';
 import {getAnalytics} from 'firebase/analytics';
 import {getFirestore} from 'firebase/firestore';
-import publicFirebaseConfig from './publicFirebaseConfig.json';
-
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -37,7 +35,7 @@ let firebaseAnalytics;
 
 if (typeof window !== 'undefined') {
     try {
-        firebaseApp = initializeApp(publicFirebaseConfig)
+        firebaseApp = initializeApp(JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_CONFIG))
         firebaseAnalytics = getAnalytics(firebaseApp);
     } catch (error) {
         /*
