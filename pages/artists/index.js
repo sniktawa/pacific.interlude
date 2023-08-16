@@ -62,23 +62,11 @@ export default function Talent() {
               </div>
               
               <div className="col text-left">
-                {/* Your First Column Content */}
-                <img className="select-image" src="https://fakeimg.pl/300x500" />
-                <div className="artist-description pt-2 text-uppercase">
-                  <div className="artist-name">Person 3</div>
-                  <div className="artist-title">Videography & Drone</div>
-                </div>
+              
               </div>
 
               <div className="col text-left">
-                {/* Your First Column Content */}
-                <a href="/path-to-destination">
-                <img className="select-image" src="https://fakeimg.pl/300x500" />
-                </a>
-                <div className="artist-description pt-2 text-uppercase">
-                  <div className="artist-name">Person 4</div>
-                  <div className="artist-title">Creative Director</div>
-                </div>
+              
               </div>
 
             </div>
