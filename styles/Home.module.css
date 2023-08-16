@@ -12,6 +12,13 @@
   padding: 1rem;
   /*overflow-y: visible;*/
 }
+/* FuturaTSNew */
+@font-face {
+  font-family: 'FuturaTSNew';
+  src: url('/fonts/FuturaTSNew.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 .body {
   border: 1px solid black;
