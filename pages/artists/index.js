@@ -43,20 +43,22 @@ export default function Talent() {
             <div className="responsive-container col-container">
               <div className="col text-left">
                 {/* Your First Column Content */}
-                <img className="select-image" src="https://fakeimg.pl/300x500" />
-                <div className="artist-description pt-2 text-uppercase">
-                  <div className="artist-name">Arnie Watkins</div>
-                  <div className="artist-title">Creative Director</div>
-                </div>
+                <a href="/artists/arnie-watkins">
+                  <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Farnie-watkins%2Fmain%2Farnie-photo.jpg?alt=media&token=11cc9eff-1ad9-48e7-96d3-3932d36c1dc4" />
+                  <div className="artist-description pt-2 text-uppercase">
+                    <div className="artist-name">Arnie Watkins</div>
+                    <div className="artist-title">Photographer / Creative Director</div>
+                  </div>
+                </a>
               </div>
        
               <div className="col text-left">
                 {/* Your First Column Content */}
                 <a href="/artists/andrew-russell">
-                  <img className="select-image" src="https://fakeimg.pl/300x500" />
+                  <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fmain%2FPNG%20image%202.jpeg?alt=media&token=6eafc1e4-f672-4e6d-880b-baae31e1340a" />
                   <div className="artist-description pt-2 text-uppercase">
                     <div className="artist-name">Andrew Russell</div>
-                    <div className="artist-title">Creative Director</div>
+                    <div className="artist-title">Photographer</div>
                   </div>
                 </a>
               </div>
@@ -187,7 +189,20 @@ export default function Talent() {
         .select-image, .col img {
           cursor: pointer;
         }        
-        
+        .col-container a::before {
+          content: " ";
+          display: block;
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          inset: 0 0 0 0;
+          background: hsl(800 0% 4%);
+          height: 2px;
+          top: 100%;
+          z-index: -1;
+          transition: transform .3s ease;
+        }
       `}</style>
     </>
   )

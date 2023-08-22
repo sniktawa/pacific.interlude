@@ -57,46 +57,113 @@ export default function Talent() {
           <NavComponent />
           <div className={`d-flex flex-column ${styles.about} new-container`} style={{ maxHeight: 'calc(100% - 3em)' }}>
             <div className={`justify-content-center align-items-center new-titles`}>
-                <h1 className="newExtraBold">Andrew Russell</h1>
+                <h1 className="newExtraBold">Arnie Watkins</h1>
                 <h2>Photographer</h2>
             </div>
+          
+            <video
+                  src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Farnie-watkins%2Fgallery%2FNike-Gif.mov?alt=media&token=58bd618e-ae25-47d6-a8a6-9a130abce3b7"
+                  loop
+                  muted
+                  autoPlay
+                  playsInline
+                  style={{ width: 'auto', height: '97%' }}
+                  className={`pb-2`}
+                  onLoadedMetadata={(e) => {
+                    e.target.play();
+                  }}
+                  onError={(e) => {
+                    console.error('Video error:', e);
+                  }}
+                />
 
-            <img src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fbanner%2FPNGimage.jpeg?alt=media&token=620129b5-6b97-48a2-b514-77586d563a20"/>
-                    
             <div className={`d-flex w-100 flex-column`}> {/* line full width */}
              
                 <div className={`justify-content-center align-items-center new-titles top-line`}>
                   <div className="newLargeTitle newLight pt-4">
-                    PHOTO
+                    FILM DIRECTION
                   </div>
                 </div>
-
-                
                 <div className="responsive-container col-container">
 
                     <div className="col text-left">
-                        {/* Your First Column Content */}
-                        <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fsurf.png?alt=media&token=0e4605a7-8168-4b38-b381-890a35dade7d" />
+                        {/* TL Column Content */}
+                        <video
+                            src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Farnie-watkins%2Fgallery%2FNike-Gif.mov?alt=media&token=58bd618e-ae25-47d6-a8a6-9a130abce3b7"
+                            loop
+                            muted
+                            autoPlay
+                            playsInline
+                            style={{ width: '100%', height: 'auto' }}
+                            className={`pb-2`}
+                            onLoadedMetadata={(e) => {
+                                e.target.play();
+                            }}
+                            onError={(e) => {
+                                console.error('Video error:', e);
+                            }}
+                            />
                     </div>
             
-                    <div className="col text-left">
-                        {/* Your First Column Content */}
-                        <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Ftravel.png?alt=media&token=3af0af3b-97f8-491e-aceb-0cdfaea9c858" />
+                    <div className="col-wide text-left">
+                        {/* TR Column Content */}
+                        <video
+                            src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Farnie-watkins%2Fgallery%2FAureum-web.mov?alt=media&token=029020f2-f2eb-4232-95b7-c95107354882"
+                            loop
+                            muted
+                            autoPlay
+                            playsInline
+                            style={{ width: '100%', height: '89%' }}
+                            className={`pb-2`}
+                            onLoadedMetadata={(e) => {
+                                e.target.play();
+                            }}
+                            onError={(e) => {
+                                console.error('Video error:', e);
+                            }}
+                            />
                     </div>
-                    
-                    <div className="col text-left">
-                        {/* Your First Column Content */}
-                        <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fwater.png?alt=media&token=695e7338-c508-4d20-989f-1b13bf5623c5" />
+
+                </div>
+
+                <div className="responsive-container col-container">
+
+                    <div className="col-wide text-left">
+                        {/* BL Column Content */}
+                        <video
+                            src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Farnie-watkins%2Fgallery%2FBamba-Web.mov?alt=media&token=8b0596d2-83d3-4271-894c-368901512306"
+                            loop
+                            muted
+                            autoPlay
+                            playsInline
+                            style={{ width: '100%', height: '88%' }}
+                            className={`pb-2`}
+                            onLoadedMetadata={(e) => {
+                                e.target.play();
+                            }}
+                            onError={(e) => {
+                                console.error('Video error:', e);
+                            }}
+                            />
                     </div>
 
                     <div className="col text-left">
-                        {/* Your First Column Content */}
-                        <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fboard.png?alt=media&token=9c70c787-4a00-42d5-8d73-6f28bfa8e02c" />
-                    </div>
-
-                    <div className="col text-left">
-                        {/* Your First Column Content */}
-                        <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fswim.png?alt=media&token=b1a0c2db-8f09-446f-8ba4-cc53e072c2c0" />
+                        {/* BR Column Content */}
+                        <video
+                            src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Farnie-watkins%2Fgallery%2FNIke-Web-Video.mp4?alt=media&token=33717bee-7ad0-4232-8e5e-696a10b06a5f"
+                            loop
+                            muted
+                            autoPlay
+                            playsInline
+                            style={{ width: '100%', height: 'auto' }}
+                            className={`pb-2`}
+                            onLoadedMetadata={(e) => {
+                                e.target.play();
+                            }}
+                            onError={(e) => {
+                                console.error('Video error:', e);
+                            }}
+                            />
                     </div>
 
 
@@ -110,15 +177,13 @@ export default function Talent() {
                     <div className="artist-biography">
                       
                         <div className="biography-title">BIOGRAPHY</div>
-                        <div className="biography-text">Photographer and director Andrew Russell is known for his natural style of photography, influenced by light and movement. Born and raised in Los Angeles, he lives and breathes the California lifestyle, finding inspiration in the ocean, coastal landscapes and a classic approach to image making. When not in California, Andrew travels around the world shooting photos for brands and capturing the
-different cultures and experiences he encounters.</div>
+                        <div className="biography-text">Arnie Watkins, an architect of visual sensations, is the CEO and director of Pacific Interlude, a Production Company that crafts immortal imprints in the fabric of brand identity.</div>
 
-                        <div className="biography-text">Andrew's unique style and authenticity can be felt in both his personal and professional work. Whether shooting photography while traveling, or collaborating with brands on special projects that fit his lifestyle, for Andrew, every day is filled with creativity in one way or another.</div>
+                        <div className="biography-text">With a voyeuristic eye, he captures the essence of timeless moments, turning ordinary scenes into extraordinary narratives.</div>
                         
-                        <div className="biography-text">When he isn't directing and shooting campaigns, Andrew can be found surfing the California coast or driving through the hills, finding skate spots and chasing sunsets.</div>
+                        <div className="biography-text">His art as a lifestyle photographer transcends the mundane, giving life to content that resonates, enchants, and endures.</div>
                         
-                        <div className="biography-title">Clients and collaborations include:</div>
-                        <div className="biography-text">Samsonite, Sanuk, PacSun, Movado, Pura Vida, GoMacro, Suspicious Antwerp, LSKD, Otis Eyewear, Poppy America, Blenders Eyewear, Freestyle Watches, Pyzel Surfboards, Carver Skateboards, Bond- Eye Swim, Sympl, Raen Eyewear, Snap Wireless, One By One, Neven Eyewear, Aimant Watches, One Plus, Lids, Path Water, Visit Mammoth, Fashion Institute of Design and Merchandising</div>
+                        <div className="biography-text">Connecting brands with their audience in the most intimate and authentic way, Arnie's creations are not just images but experiences – palpable, provocative, and perpetually fresh.</div>
                       </div>
                     </div>
                     <div className="col">
@@ -128,7 +193,7 @@ different cultures and experiences he encounters.</div>
                         <div className="biography-text"><a ref={emailLinkRef} className="email-link" href="#">zoe<span></span>@<span></span>pacificinterlude<span></span>.<span></span>com</a></div>
 
                         <div className="biography-title">INSTAGRAM</div>
-                        <div className="biography-text"><a href="https://instagram.com/andrewrossrussell" target="_blank">@ANDREWROSSRUSSELL</a></div>
+                        <div className="biography-text"><a href="https://instagram.com/arniewatkins" target="_blank">@ARNIEWATKINS</a></div>
                       </div>
 
                     </div>
@@ -163,13 +228,23 @@ different cultures and experiences he encounters.</div>
           }
           .col {
             overflow: hidden;
-            flex: 1 0 calc(20% - 2em);  /* Assuming you want four columns */
+            flex: 1 0 calc(20% - 1em);
+            margin: 1em;
+          }
+          .col-wide {
+            overflow: hidden;
+            flex: 1 0 calc(25% - 1em);
             margin: 1em;
           }
           
           @media (max-width: 920px) {
             .col {
               flex: 1 0 calc(50% - 1em);  /* Two columns on medium-sized screens */
+              margin: 0.5em;
+            }
+            .col-wide {
+              overflow: hidden;
+              flex: 1 0 calc(50% - 1em);
               margin: 0.5em;
             }
             .new-container{
@@ -183,6 +258,10 @@ different cultures and experiences he encounters.</div>
             .col {
               flex: 1 0 100%;  /* One column on smaller screens */
               margin: 0.5em 0;
+            }
+            .col-wide {
+              flex: 1 0 100%;
+              margin: 1em;
             }
             .new-container{
               margin-left:1rem;
