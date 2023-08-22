@@ -189,7 +189,7 @@ export default function Talent() {
         .select-image, .col img {
           cursor: pointer;
         }        
-        .col-container a::before {
+        .col a::before {
           content: " ";
           display: block;
           position: absolute;
