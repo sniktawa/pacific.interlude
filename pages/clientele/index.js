@@ -58,6 +58,7 @@ export default function Projects() {
             }
           }
         });
+
     } catch (e) {
         console.error(e)
     }
@@ -86,7 +87,7 @@ export default function Projects() {
                 <div className={`d-flex w-100 h-100 justify-content-center align-items-center projectsImageOverlay ${selectedAlbum && selectedAlbum.id === album.id ? 'visible' : ''}`}>
                   <h1>{album.title}</h1>
                 </div>
-              </div>
+              </div> 
           </div>
         )})
   }

@@ -61,7 +61,7 @@ export default function Talent() {
                 <h2>Photographer</h2>
             </div>
 
-            <img src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fbanner%2FPNGimage.jpeg?alt=media&token=620129b5-6b97-48a2-b514-77586d563a20"/>
+            <img src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fbanner%2FPNGimage.png?alt=media&token=2ce281bd-14f4-4201-9358-19c4736bfead"/>
                     
             <div className={`d-flex w-100 flex-column`}> {/* line full width */}
              

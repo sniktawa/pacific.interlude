@@ -55,7 +55,7 @@ export default function Talent() {
               <div className="col text-left">
                 {/* Your First Column Content */}
                 <a href="/artists/andrew-russell">
-                  <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fmain%2FPNG%20image%202.jpeg?alt=media&token=6eafc1e4-f672-4e6d-880b-baae31e1340a" />
+                  <img className="select-image" src="https://firebasestorage.googleapis.com/v0/b/pacifc-interlude-website.appspot.com/o/artists%2Fandrew-russell%2Fmain%2FPNG%20image%202.png?alt=media&token=8e8a8d85-8b11-4b65-ad2b-ea8c68f2d6c2" />
                   <div className="artist-description pt-2 text-uppercase">
                     <div className="artist-name">Andrew Russell</div>
                     <div className="artist-title">Photographer</div>
